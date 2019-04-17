@@ -3,18 +3,25 @@
 % 一个公告模板的测试底本
 %%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass[a4paper,12pt]{article}
-\usepackage[fontset=adobe]{ctex}
-\usepackage{fontspec}
-\setmainfont{Cambria}
+\documentclass{qyxf-notice}
+\usepackage{enumerate}
+\title{第一份公告}
 
 \begin{document}
-\begin{center}
-\Huge \textsc{Xi'an Jiaotong University}\\[0.5\baselineskip]
-\LARGE \textbf{Qian Yuan Xue Fu} {\kaishu 钱院学辅}
-\end{center}
+\maketitle
 
-\hrule
+各位钱院同学好！这是钱院学辅出产的一份用\LaTeX 设计的公告，请大家吐槽。你可以通过以下
+几种方法吐槽：
+\begin{enumerate}[\quad\bf(1)]
+    \item 给钱院学辅发一封邮件：qianxiaofu.mail@qq.com
+    \item QQ联系@钱小辅：206713407
+\end{enumerate}
 
-\vfill\thispagestyle{empty}
+欢迎大家吐槽！
+
+\begin{flushright}
+钱院学辅学研部
+
+2019年4月17日
+\end{flushright}
 \end{document}
