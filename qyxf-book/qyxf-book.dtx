@@ -1,7 +1,7 @@
 % \iffalse meta-comment
 %
 % Copyright (C) 2019 by xjtu-blacksmith
-% -----------------------------------
+%% -----------------------------------
 %
 % This file may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License, either version 1.3
@@ -25,6 +25,7 @@
 \CodelineIndex
 \RecordChanges
 \usepackage[fontset=adobe,heading]{ctex}
+\usepackage[margin=1in]{geometry}
 \setmainfont{Cambria}
 \begin{document}
 \DocInput{\jobname.dtx}
@@ -32,7 +33,7 @@
 %</driver>
 % \fi
 %
-% \CheckSum{90}
+% \CheckSum{174}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -58,6 +59,7 @@
 % \DoNotIndex{}
 % \renewcommand{\filedate}{2019/04/30}
 % \renewcommand{\fileversion}{v1.0}
+% \newcommand{\QYXF}{\fbox{QYXF}}
 % \title{\textsf{\jobname} 文档类： The \textsf{\jobname} class\thanks{This document
 %   corresponds to \textsf{\jobname}~\fileversion,
 %   dated \filedate.}}
@@ -78,6 +80,14 @@
 % \section{使用 Usage}
 % 在\verb|\documenclass|命令中引用\textsf{\jobname}文档类即可。
 %
+% \subsection{建议}
+%\begin{enumerate}
+%    \item 不建议在本文档类下使用\textsf{part}级别的标题，
+%    因本文档类从未定义过\textsf{part}标题对应的样式和目录样式。
+%    此外，针对于\QYXF{}目前所排印的书籍而言，这一级的标题无疑
+%    是多余了，无论是对作者还是读者而言。
+%\end{enumerate}
+%
 % \StopEventually{\PrintIndex}
 %
 % \section{实现 Implementation}
@@ -90,9 +100,11 @@
 \ProvidesClass{qyxf-book}
   [2019/04/28 v1.0 nothing but a skeleton]
 \typeout{The book template provided by Qian Yuan Xue Fu}
-\LoadClass[10pt,a4paper,twoside,openany]{book}
-% -------- pkg: 创建关键字属性 --------
+\LoadClass[10pt,a4paper,twoside]{book}
+%% -------- pkg: 创建关键字属性 --------
 \RequirePackage{kvoptions}
+\SetupKeyvalOptions{family=QYXF,prefix=QYXF@,setkeys=\kvsetkeys}
+\DeclareBoolOption[true]{parskip}
 %    \end{macrocode}
 % 这里都是一些基本的定义。
 %    \begin{macrocode}
@@ -100,13 +112,27 @@
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-% -------- pkg: 文本处理 --------
+%% -------- pkg: 文本处理 --------
 \RequirePackage[fontset=adobe,heading]{ctex}
 \setmainfont{Cambria}       % 目前默认使用的serif字体
 \setsansfont{Calibri}       % 目前默认使用的sans-serif字体
 \setmonofont{Courier New}   % 目前默认使用的等宽字体
+\renewcommand{\thefootnote}{\textbf{(\arabic{footnote})}}
+%% -------- pkg: 标题目录 --------
+\CTEXsetup[name={\S,}]{section}
+\RequirePackage{titlesec,titletoc}
+\titlecontents{chapter}[24pt]{\hspace{-2pc}\filright}
+              {\normalsize\bfseries\contentspush{\thecontentslabel\ }}
+              {}{\bfseries\titlerule*[8pt]{.}\contentspage}
+\titlecontents{section}[20pt]{\filright}
+              {\contentspush{\thecontentslabel\ }}
+              {}{\titlerule*[8pt]{.}\contentspage}
+\titlecontents{subsection}[18pt]{\hspace{2pc}\filright}
+              {\contentspush{\thecontentslabel\ }\itshape}
+              {}{\titlerule*[8pt]{}\contentspage}
+\setcounter{tocdepth}{2}
 \newtoks\subtitle
-% -------- pkg: 页面美化 --------
+%% -------- pkg: 页面美化 --------
 \RequirePackage{geometry}
 \geometry{margin=1in}
 \RequirePackage{hyperref}
@@ -121,12 +147,24 @@
     linktocpage,
     pageanchor=true
 }
+%% -------- pkg: 页眉页脚 --------
 \RequirePackage{fancyhdr}
-\RequirePackage{titlesec}
-\RequirePackage{enumitem}
+\fancyhead[ER]{\nouppercase\leftmark}
+\fancyhead[OL]{\nouppercase\rightmark}
+\fancyhead[EL,OR]{\bf\thepage}
+\fancyhead[C]{}
+\fancyfoot[C]{}
+\fancypagestyle{plain}{%
+\fancyhf{}
+\fancyhead[EL,OR]{\fbox{\bf\thepage}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+}
 \RequirePackage{lastpage}
-% -------- pkg: 数学处理 --------
-% -------- pkg: 图表处理 --------
+%% -------- pkg: 数学处理 --------
+%% -------- pkg: 列表美化 --------
+\RequirePackage{enumitem}
+%% -------- pkg: 图表处理 --------
 \RequirePackage{graphicx}
 \graphicspath{{./figure/}{./pic/}{./image}}
 \RequirePackage{longtable,booktabs}
@@ -134,21 +172,33 @@
 \usetikzlibrary{calc,backgrounds}
 \RequirePackage{tcolorbox,tabu}
 \tcbuselibrary{listings,theorems,skins}
+%% -------- pkg: 附录设计 --------
+\usepackage{appendix}
+\CTEXsetup[number={\Roman{chapter}}]{appendix}
 %    \end{macrocode}
 %
+% \subsection{关键字参数生效处理}
+% 以下来处理关键字参数对排版效果的影响。
+%    \begin{macrocode}
+%% -------- kvp: 段距设置 --------
+\ProcessKeyvalOptions*
+\ifQYXF@parskip
+     \setlength\parskip{0.3\baselineskip}
+\fi
+%    \end{macrocode}
 % \subsection{首页制作}
 %    \begin{macrocode}
+%% -------- sec: 首页设计 --------
 \renewcommand*{\maketitle}{%
 \hypersetup{pageanchor=false}
 \begin{titlepage}
 \phantom{s}
-
 \vspace{3cm}
 \begin{center}\large
 \begin{tcolorbox}[blanker,borderline west={1mm}{0pt}{blue},%
 left=20pt]
 {\fontsize{40pt}{\baselineskip}\selectfont\bfseries \@title}\\[\baselineskip]
-{\Huge\itshape \the\subtitle}\\[0.3\baselineskip]
+{\Huge\itshape \the\subtitle}
 \end{tcolorbox}
 \begin{tcolorbox}[blanker,borderline west={1mm}{0pt}{black!50},%
 left=20pt]
@@ -160,17 +210,13 @@ left=20pt]
 \textsc{Qian Yuan Xue Fu}\\[0.5\baselineskip]
 \includegraphics[width=0.5\textwidth]{name.png}
 \end{center}
-
 \begin{tikzpicture}[remember picture,overlay]
     \begin{pgfonlayer}{background}
-    \node at ($(current page.east) +(0in,0in)$) {\includegraphics[width=0.8\textwidth]{cover.png}};
-
+    \node at ($(current page.east) +(0in,0in)$) {%
+    \includegraphics[width=0.8\textwidth]{cover.png}};
     \end{pgfonlayer}
-
 \end{tikzpicture}
-
 \end{titlepage}
-
 \thispagestyle{empty}
 \newpage
 \hypersetup{pageanchor=true}
@@ -179,6 +225,20 @@ left=20pt]
 \fbox{\fangsong 本文档共有\pageref{LastPage}页，请您仔细审读。}
 \end{center}
 \newpage
+}
+
+%% -------- sec: 目录设计 --------
+\renewcommand\tableofcontents{%
+\pagestyle{empty}
+\centerline{%
+\normalfont\Large\bfseries\contentsname%
+\@mkboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}
+}
+\vskip 3ex%
+{\setlength\parskip{0pt}\@starttoc{toc}}
+\newpage
+\pagestyle{fancy}
+\setcounter{page}{1}
 }
 %    \end{macrocode}
 % 到此结束。

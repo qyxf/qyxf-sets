@@ -16,3 +16,10 @@
 *.nav
 *.vrb
 *.snm
+
+## qyxf-book撰写期间出产文件
+qyxf-book.cls
+test.tex
+test.pdf
+*.glo
+*.idx
