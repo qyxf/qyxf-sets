@@ -1,0 +1,185 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 2019 by xjtu-blacksmith
+% -----------------------------------
+%
+% This file may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in:
+%
+%   http://www.latex-project.org/lppl.txt
+%
+% and version 1.3 or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% \fi
+%
+% \iffalse
+%<*driver>
+\ProvidesFile{\jobname.dtx}
+%</driver>
+%<*driver>
+\documentclass{ltxdoc}
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+\usepackage[fontset=adobe,heading]{ctex}
+\setmainfont{Cambria}
+\begin{document}
+\DocInput{\jobname.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \CheckSum{90}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+%
+% \changes{v1.0}{2019/04/28}{初始版本}
+%
+% \GetFileInfo{\jobname.dtx}
+%
+% \DoNotIndex{}
+% \renewcommand{\filedate}{2019/04/30}
+% \renewcommand{\fileversion}{v1.0}
+% \title{\textsf{\jobname} 文档类： The \textsf{\jobname} class\thanks{This document
+%   corresponds to \textsf{\jobname}~\fileversion,
+%   dated \filedate.}}
+% \author{xjtu-blacksmith \\ \texttt{yjr134@163.com}}
+% \date{\filedate}
+%
+% \maketitle
+%
+% \begin{abstract}
+%   \textsf{\jobname}是由钱院学辅设计的一套\LaTeX{}书籍模板。
+% \end{abstract}
+%
+% \section{简介 Introduction}
+%
+% \textsf{\jobname}是由钱院学辅设计的一套\LaTeX{}书籍模板。它简洁美观，适用于一般性质
+% 书籍内容的排版。
+%
+% \section{使用 Usage}
+% 在\verb|\documenclass|命令中引用\textsf{\jobname}文档类即可。
+%
+% \StopEventually{\PrintIndex}
+%
+% \section{实现 Implementation}
+%   以下展示本模板的实现细节。
+%
+% \subsection{准备工作}
+%    \begin{macrocode}
+%<*class>
+\NeedsTeXFormat{LaTeX2e}[2005/12/01]
+\ProvidesClass{qyxf-book}
+  [2019/04/28 v1.0 nothing but a skeleton]
+\typeout{The book template provided by Qian Yuan Xue Fu}
+\LoadClass[10pt,a4paper,twoside,openany]{book}
+% -------- pkg: 创建关键字属性 --------
+\RequirePackage{kvoptions}
+%    \end{macrocode}
+% 这里都是一些基本的定义。
+%    \begin{macrocode}
+%</class>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+% -------- pkg: 文本处理 --------
+\RequirePackage[fontset=adobe,heading]{ctex}
+\setmainfont{Cambria}       % 目前默认使用的serif字体
+\setsansfont{Calibri}       % 目前默认使用的sans-serif字体
+\setmonofont{Courier New}   % 目前默认使用的等宽字体
+\newtoks\subtitle
+% -------- pkg: 页面美化 --------
+\RequirePackage{geometry}
+\geometry{margin=1in}
+\RequirePackage{hyperref}
+\hypersetup{
+    breaklinks,
+    unicode,
+    linktoc=all,
+    bookmarksnumbered=true,
+    bookmarksopen=true,
+    pdfkeywords={qyxf-book},
+    pdfborder={0 0 0},
+    linktocpage,
+    pageanchor=true
+}
+\RequirePackage{fancyhdr}
+\RequirePackage{titlesec}
+\RequirePackage{enumitem}
+\RequirePackage{lastpage}
+% -------- pkg: 数学处理 --------
+% -------- pkg: 图表处理 --------
+\RequirePackage{graphicx}
+\graphicspath{{./figure/}{./pic/}{./image}}
+\RequirePackage{longtable,booktabs}
+\RequirePackage{tikz}
+\usetikzlibrary{calc,backgrounds}
+\RequirePackage{tcolorbox,tabu}
+\tcbuselibrary{listings,theorems,skins}
+%    \end{macrocode}
+%
+% \subsection{首页制作}
+%    \begin{macrocode}
+\renewcommand*{\maketitle}{%
+\hypersetup{pageanchor=false}
+\begin{titlepage}
+\phantom{s}
+
+\vspace{3cm}
+\begin{center}\large
+\begin{tcolorbox}[blanker,borderline west={1mm}{0pt}{blue},%
+left=20pt]
+{\fontsize{40pt}{\baselineskip}\selectfont\bfseries \@title}\\[\baselineskip]
+{\Huge\itshape \the\subtitle}\\[0.3\baselineskip]
+\end{tcolorbox}
+\begin{tcolorbox}[blanker,borderline west={1mm}{0pt}{black!50},%
+left=20pt]
+{\Large 作者：\@author\\[0.3\baselineskip]
+\@date}
+\end{tcolorbox}
+\vfill
+\texttt{钱学森书院学业辅导中心}\\[0.5\baselineskip]
+\textsc{Qian Yuan Xue Fu}\\[0.5\baselineskip]
+\includegraphics[width=0.5\textwidth]{name.png}
+\end{center}
+
+\begin{tikzpicture}[remember picture,overlay]
+    \begin{pgfonlayer}{background}
+    \node at ($(current page.east) +(0in,0in)$) {\includegraphics[width=0.8\textwidth]{cover.png}};
+
+    \end{pgfonlayer}
+
+\end{tikzpicture}
+
+\end{titlepage}
+
+\thispagestyle{empty}
+\newpage
+\hypersetup{pageanchor=true}
+\phantom{s}\vfill
+\begin{center}
+\fbox{\fangsong 本文档共有\pageref{LastPage}页，请您仔细审读。}
+\end{center}
+\newpage
+}
+%    \end{macrocode}
+% 到此结束。
+% \Finale
