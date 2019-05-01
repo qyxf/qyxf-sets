@@ -33,7 +33,7 @@
 %</driver>
 % \fi
 %
-% \CheckSum{174}
+% \CheckSum{176}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -117,6 +117,8 @@
 \setmainfont{Cambria}       % 目前默认使用的serif字体
 \setsansfont{Calibri}       % 目前默认使用的sans-serif字体
 \setmonofont{Courier New}   % 目前默认使用的等宽字体
+\RequirePackage{unicode-math}
+\setmathfont{Cambria Math}  % 与正文字体相适应的数学字体
 \renewcommand{\thefootnote}{\textbf{(\arabic{footnote})}}
 %% -------- pkg: 标题目录 --------
 \CTEXsetup[name={\S,}]{section}
