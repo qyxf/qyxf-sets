@@ -24,16 +24,15 @@
 \EnableCrossrefs
 \CodelineIndex
 \RecordChanges
-\usepackage[fontset=adobe,heading]{ctex}
+\usepackage[heading]{ctex}
 \usepackage[margin=1in]{geometry}
-\setmainfont{Cambria}
 \begin{document}
 \DocInput{\jobname.dtx}
 \end{document}
 %</driver>
 % \fi
 %
-% \CheckSum{176}
+% \CheckSum{286}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -52,7 +51,7 @@
 %   Right brace   \}     Tilde         \~}
 %
 %
-% \changes{v1.0}{2019/04/28}{初始版本}
+% \changes{v1.0}{2019/05/03}{初始版本}
 %
 % \GetFileInfo{\jobname.dtx}
 %
@@ -100,11 +99,18 @@
 \ProvidesClass{qyxf-book}
   [2019/04/28 v1.0 nothing but a skeleton]
 \typeout{The book template provided by Qian Yuan Xue Fu}
-\LoadClass[10pt,a4paper,twoside]{book}
+\LoadClass[10pt,twoside,openany]{book}
 %% -------- pkg: 创建关键字属性 --------
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{family=QYXF,prefix=QYXF@,setkeys=\kvsetkeys}
-\DeclareBoolOption[true]{parskip}
+\DeclareBoolOption[false]{parskip}
+\DeclareBoolOption[false]{smallersize}
+\DeclareVoidOption{b5paper}{\kvsetkeys{QYXF}{smallersize}}
+\DeclareBoolOption{color}
+\DeclareBoolOption[true]{decoration}
+\DeclareBoolOption[false]{opensource}
+\ProcessKeyvalOptions*
+%\DeclareOption*{\PassOptionsToClass{\CurrentOption}{book}}
 %    \end{macrocode}
 % 这里都是一些基本的定义。
 %    \begin{macrocode}
@@ -117,25 +123,30 @@
 \setmainfont{Cambria}       % 目前默认使用的serif字体
 \setsansfont{Calibri}       % 目前默认使用的sans-serif字体
 \setmonofont{Courier New}   % 目前默认使用的等宽字体
+\RequirePackage{amsmath}
 \RequirePackage{unicode-math}
 \setmathfont{Cambria Math}  % 与正文字体相适应的数学字体
 \renewcommand{\thefootnote}{\textbf{(\arabic{footnote})}}
-%% -------- pkg: 标题目录 --------
-\CTEXsetup[name={\S,}]{section}
-\RequirePackage{titlesec,titletoc}
-\titlecontents{chapter}[24pt]{\hspace{-2pc}\filright}
-              {\normalsize\bfseries\contentspush{\thecontentslabel\ }}
-              {}{\bfseries\titlerule*[8pt]{.}\contentspage}
-\titlecontents{section}[20pt]{\filright}
-              {\contentspush{\thecontentslabel\ }}
-              {}{\titlerule*[8pt]{.}\contentspage}
-\titlecontents{subsection}[18pt]{\hspace{2pc}\filright}
-              {\contentspush{\thecontentslabel\ }\itshape}
-              {}{\titlerule*[8pt]{}\contentspage}
-\setcounter{tocdepth}{2}
-\newtoks\subtitle
+%% -------- pkg: 图表处理 --------
+\RequirePackage{graphicx}
+\graphicspath{{./figure/}{./pic/}{./image}}
+\RequirePackage{longtable,booktabs}
+\RequirePackage{tikz}
+\usetikzlibrary{calc,backgrounds}
+\RequirePackage{tcolorbox,tabu}
+\tcbuselibrary{listings,theorems,skins}
+%% -------- pkg: 数学处理 --------
+\newcommand{\exercise}[1]{\tcbox[on line,top=0mm,bottom=0mm,right=0mm,left=0mm]{\bfseries 练习#1}\ }
+\newcommand{\note}{\textbf{注记}\ }
+\newcommand{\solve}{\textbf{解}\ }
 %% -------- pkg: 页面美化 --------
 \RequirePackage{geometry}
+\ifQYXF@smallersize
+  \setlength{\paperwidth}{176mm}
+  \setlength{\paperheight}{250mm}
+\else
+  \geometry{a4paper}
+\fi
 \geometry{margin=1in}
 \RequirePackage{hyperref}
 \hypersetup{
@@ -149,58 +160,70 @@
     linktocpage,
     pageanchor=true
 }
+\RequirePackage{pgfornament-han}
+%% -------- pkg: 标题目录 --------
+\ctexset{section={name={\S,}}}
+\RequirePackage{titlesec,titletoc}
+\titlecontents{chapter}[24pt]{\hspace{-2pc}\filright}
+              {\normalsize\bfseries\contentspush{\thecontentslabel\ }}
+              {}{\bfseries\titlerule*[8pt]{.}\contentspage}
+\titlecontents{section}[20pt]{\filright}
+              {\contentspush{\thecontentslabel\ }}
+              {}{\titlerule*[8pt]{.}\contentspage}
+\titlecontents{subsection}[18pt]{\hspace{2pc}\filright}
+              {\contentspush{\thecontentslabel\ }\itshape}
+              {}{\titlerule*[8pt]{}\contentspage}
+\setcounter{tocdepth}{2}
 %% -------- pkg: 页眉页脚 --------
 \RequirePackage{fancyhdr}
-\fancyhead[ER]{\nouppercase\leftmark}
-\fancyhead[OL]{\nouppercase\rightmark}
+\fancyhead[EC]{\fangsong\nouppercase\leftmark}
+\fancyhead[OC]{\fangsong\nouppercase\rightmark}
 \fancyhead[EL,OR]{\bf\thepage}
-\fancyhead[C]{}
-\fancyfoot[C]{}
+\fancyhead[ER,OL]{}
+\fancyfoot[C]{\textsc{Qian Yuan Xue Fu}\\\resizebox{0.2\linewidth}{1.5ex}{\pgfornamenthan[scale=0.05]{58}}}
 \fancypagestyle{plain}{%
 \fancyhf{}
-\fancyhead[EL,OR]{\fbox{\bf\thepage}}
+\fancyfoot[C]{\textsc{Qian Yuan Xue Fu}\\\resizebox{0.2\linewidth}{1.5ex}{\pgfornamenthan[scale=0.05]{58}}}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 }
+\setlength{\headheight}{13pt}
 \RequirePackage{lastpage}
-%% -------- pkg: 数学处理 --------
 %% -------- pkg: 列表美化 --------
-\RequirePackage{enumitem}
-%% -------- pkg: 图表处理 --------
-\RequirePackage{graphicx}
-\graphicspath{{./figure/}{./pic/}{./image}}
-\RequirePackage{longtable,booktabs}
-\RequirePackage{tikz}
-\usetikzlibrary{calc,backgrounds}
-\RequirePackage{tcolorbox,tabu}
-\tcbuselibrary{listings,theorems,skins}
+\RequirePackage{enumerate}
+\RequirePackage{pifont}
 %% -------- pkg: 附录设计 --------
-\usepackage{appendix}
-\CTEXsetup[number={\Roman{chapter}}]{appendix}
+\RequirePackage{appendix}
+\ctexset{appendix={number={\Roman{chapter}}}}
+%% -------- pkg: 其他宏包 --------
+\RequirePackage[scale=1.1]{ccicons}
 %    \end{macrocode}
 %
 % \subsection{关键字参数生效处理}
 % 以下来处理关键字参数对排版效果的影响。
 %    \begin{macrocode}
 %% -------- kvp: 段距设置 --------
-\ProcessKeyvalOptions*
 \ifQYXF@parskip
      \setlength\parskip{0.3\baselineskip}
 \fi
 %    \end{macrocode}
 % \subsection{首页制作}
-%    \begin{macrocode}
 %% -------- sec: 首页设计 --------
+%    \begin{macrocode}
+\newtoks\subtitle
+\newtoks\typo
+\newtoks\version
+\newtoks\sourcepage
 \renewcommand*{\maketitle}{%
 \hypersetup{pageanchor=false}
 \begin{titlepage}
 \phantom{s}
 \vspace{3cm}
 \begin{center}\large
-\begin{tcolorbox}[blanker,borderline west={1mm}{0pt}{blue},%
+\begin{tcolorbox}[blanker,borderline west={1mm}{0pt}{black!80},%
 left=20pt]
-{\fontsize{40pt}{\baselineskip}\selectfont\bfseries \@title}\\[\baselineskip]
-{\Huge\itshape \the\subtitle}
+{\fontsize{40pt}{\baselineskip}\selectfont\bfseries\@title}\\[\baselineskip]
+{\Huge\itshape\the\subtitle}
 \end{tcolorbox}
 \begin{tcolorbox}[blanker,borderline west={1mm}{0pt}{black!50},%
 left=20pt]
@@ -213,23 +236,41 @@ left=20pt]
 \includegraphics[width=0.5\textwidth]{name.png}
 \end{center}
 \begin{tikzpicture}[remember picture,overlay]
-    \begin{pgfonlayer}{background}
-    \node at ($(current page.east) +(0in,0in)$) {%
-    \includegraphics[width=0.8\textwidth]{cover.png}};
-    \end{pgfonlayer}
+  \begin{pgfonlayer}{background}
+  \node at ($(current page.east) +(0in,0in)$) {%
+  \includegraphics[width=0.8\textwidth]{cover.png}};
+  \end{pgfonlayer}
 \end{tikzpicture}
 \end{titlepage}
 \thispagestyle{empty}
 \newpage
 \hypersetup{pageanchor=true}
 \phantom{s}\vfill
-\begin{center}
-\fbox{\fangsong 本文档共有\pageref{LastPage}页，请您仔细审读。}
-\end{center}
+\begin{tcolorbox}[title={\bfseries 作品信息}]
+\ding{228} \textbf{标题：}\@title{} - \textit{\the\subtitle}\\
+\ding{228} \textbf{作者：}\@author\\
+\ding{228} \textbf{校对排版：}\the\typo\\
+\ding{228} \textbf{出品时间：}\@date\\
+\ding{228} \textbf{总页数：}\pageref{LastPage}
+\end{tcolorbox}
+\begin{tcolorbox}[title={\bfseries 许可证说明}]
+\centerline{\tcbox{\ccbyncnd\ \fangsong 知识共享 (Creative Commons) BY-NC-ND 4.0 协议}\\[0.3\baselineskip]}
+本作品采用 \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{\textbf{CC协议}}进行许可。使用者可以在给出\emph{作者署名及资料来源}的前提下对本作品进行\emph{转载}，但不得对本作品进行\emph{修改}，亦不得基于本作品进行\emph{二次创作}，不得将本作品运用于\emph{商业用途}。
+\end{tcolorbox}
+\newcommand{\opensourceinfo}{根据作者的要求，本作品未公开源码。}
+\ifQYXF@opensource
+  \begin{tcolorbox}
+  本作品已发布于GitHub之上，发布地址为：\\
+  \centerline{\the\sourcepage}
+  本作品的版本号为\textsf{\the\version}。
+  \end{tcolorbox}
+\fi
 \newpage
 }
-
+%    \end{macrocode}
+% \subsection{目录制作}
 %% -------- sec: 目录设计 --------
+%    \begin{macrocode}
 \renewcommand\tableofcontents{%
 \pagestyle{empty}
 \centerline{%
@@ -238,7 +279,7 @@ left=20pt]
 }
 \vskip 3ex%
 {\setlength\parskip{0pt}\@starttoc{toc}}
-\newpage
+\cleardoublepage
 \pagestyle{fancy}
 \setcounter{page}{1}
 }
