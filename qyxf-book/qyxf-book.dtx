@@ -32,7 +32,7 @@
 %</driver>
 % \fi
 %
-% \CheckSum{286}
+% \CheckSum{293}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -51,48 +51,92 @@
 %   Right brace   \}     Tilde         \~}
 %
 %
-% \changes{v1.0}{2019/05/03}{初始版本}
+% \changes{v1.0}{2019/05/03}{初始版本，提供了基本的功能。}
 %
 % \GetFileInfo{\jobname.dtx}
 %
 % \DoNotIndex{}
-% \renewcommand{\filedate}{2019/04/30}
+% \renewcommand{\filedate}{2019/05/03}
 % \renewcommand{\fileversion}{v1.0}
 % \newcommand{\QYXF}{\fbox{QYXF}}
-% \title{\textsf{\jobname} 文档类： The \textsf{\jobname} class\thanks{This document
-%   corresponds to \textsf{\jobname}~\fileversion,
-%   dated \filedate.}}
+% \title{\textsf{\jobname} 文档类： The \textsf{\jobname} class\thanks{本说明文档
+%   对应于 \textsf{\jobname}~\fileversion 版本，发布时间为\filedate.}}
 % \author{xjtu-blacksmith \\ \texttt{yjr134@163.com}}
 % \date{\filedate}
 %
 % \maketitle
 %
 % \begin{abstract}
-%   \textsf{\jobname}是由钱院学辅设计的一套\LaTeX{}书籍模板。
+%   \textsf{\jobname}是由钱院学辅（QYXF）设计的一套\LaTeX{}书籍模板，由钱院学辅学研部
+%    维护。该模板主要用于正规、中等以上容量资料的排版，提供有多个可选项。目前该模板不计划
+%    对一般用户开放（和优化）。
 % \end{abstract}
 %
-% \section{简介 Introduction}
+% \section{简介}
 %
 % \textsf{\jobname}是由钱院学辅设计的一套\LaTeX{}书籍模板。它简洁美观，适用于一般性质
 % 书籍内容的排版。
 %
-% \section{使用 Usage}
+% 目前，\textsf{\jobname}主要用于正规、中等以上容量资料的排版，提供有多个可选项。目前该模板
+% 不计划对一般用户开放（和优化）。
+%
+% \section{使用}
 % 在\verb|\documenclass|命令中引用\textsf{\jobname}文档类即可。
 %
+% \subsection{文类选项}
+% 本文类提供了以下几个可选项：
+%
+% \begin{description}
+% \item[\textsf{b5paper}] 使用比\textsf{a4paper}更小的B5纸张尺寸（250mm*176mm）
+% 进行页面设计。默认使用\textsf{a4paper}。
+% \item[\textsf{parskip}] 增加使段落间更为宽敞的的段距。默认关。
+% \item[\textsf{color}] 使用有颜色的主题进行排版。默认关。（目前此功能尚未实现）
+% \item[\textsf{decoration}] 增加一些页面装饰。默认开。（目前尚未实现关闭功能）
+% \item[\textsf{opensource}] 设置作品为开源的，在封二上显示开源地址和作品版本。默认关。
+% \end{description}
+%
+% \subsection{文档信息配置}
+% 除了\textsf{\textbackslash maketitle}默认需求的\textsf{\textbackslash title}、
+% \textsf{\textbackslash author}与\textsf{\textbackslash date}三条基本信息之外，
+% 本文类还提供了以下信息的接口：
+% \begin{description}
+% \item[\textsf{\textbackslash subtitle}] 副标题信息，建议设置为本作品的英文标题。
+% \item[\textsf{\textbackslash typo}] 排版人员信息。
+% \item[\textsf{\textbackslash version}] 版本号，在\textsf{opensource}选项开启时有效。
+% \item[\textsf{\textbackslash sourcepage}] 开源页面地址，在\textsf{opensource}选项开启时有效。
+% \end{description}
+% 建议用户在排版时一定要将以上所有的文档信息填全，否则在封二的文档信息盒子里将显示空白。
+%
+% \subsection{特殊环境}
+% 本文类目前提供的特殊环境（命令）有：
+% \begin{description}
+% \item[\textsf{\textbackslash exercise}] 输出一个表示“练习X”的盒子。
+% \item[\textsf{\textbackslash solve}] 引导一个“解”段落。
+% \item[\textsf{\textbackslash note}] 引导一个“注记”段落。
+% \item[\textsf{\textbackslash analysis}] 引导一个“分析”段落。
+% \end{description}
+% 请用户善用这些特殊环境，以使得页面趋于标准、清晰。
+%
 % \subsection{建议}
-%\begin{enumerate}
-%    \item 不建议在本文档类下使用\textsf{part}级别的标题，
-%    因本文档类从未定义过\textsf{part}标题对应的样式和目录样式。
-%    此外，针对于\QYXF{}目前所排印的书籍而言，这一级的标题无疑
-%    是多余了，无论是对作者还是读者而言。
-%\end{enumerate}
+% 以下建议的提出，大多源于本文档类中未能实现或未做优化的功能。
+% 
+% \begin{enumerate}
+% \item 不建议在本文档类下使用\textsf{part}级别的标题，
+% 因本文档类从未定义过\textsf{part}标题对应的样式和目录样式。
+% 此外，针对于\QYXF{}目前所排印的书籍而言，这一级的标题无疑
+% 是多余了，无论是对作者还是读者而言。
+% \item 本文类中，中文采用Adobe系列的字体，英文采用Cambria和Calibri的组合，数学字体采用
+% Cambria Math（由\textsf{unicode-math}宏包驱动）。如无特殊情况，不建议用户更换字体。
+% \item 请不要自行加载于本文类中已加载过的宏包，避免冲突。
+% \end{enumerate}
 %
 % \StopEventually{\PrintIndex}
 %
-% \section{实现 Implementation}
+% \section{实现}
 %   以下展示本模板的实现细节。
 %
 % \subsection{准备工作}
+% 首先是必要的声明与对基本文类的加载。
 %    \begin{macrocode}
 %<*class>
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
@@ -100,7 +144,10 @@
   [2019/04/28 v1.0 nothing but a skeleton]
 \typeout{The book template provided by Qian Yuan Xue Fu}
 \LoadClass[10pt,twoside,openany]{book}
-%% -------- pkg: 创建关键字属性 --------
+%    \end{macrocode}
+%
+% 接下来定义各关键字参数。
+%    \begin{macrocode}
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{family=QYXF,prefix=QYXF@,setkeys=\kvsetkeys}
 \DeclareBoolOption[false]{parskip}
@@ -110,15 +157,12 @@
 \DeclareBoolOption[true]{decoration}
 \DeclareBoolOption[false]{opensource}
 \ProcessKeyvalOptions*
-%\DeclareOption*{\PassOptionsToClass{\CurrentOption}{book}}
-%    \end{macrocode}
-% 这里都是一些基本的定义。
-%    \begin{macrocode}
-%</class>
 %    \end{macrocode}
 %
+% \subsection{设计实现}
+% 接下来，由\textsf{ctex}宏包引入对中文的支持，并配置西文字体。
+%
 %    \begin{macrocode}
-%% -------- pkg: 文本处理 --------
 \RequirePackage[fontset=adobe,heading]{ctex}
 \setmainfont{Cambria}       % 目前默认使用的serif字体
 \setsansfont{Calibri}       % 目前默认使用的sans-serif字体
@@ -127,19 +171,33 @@
 \RequirePackage{unicode-math}
 \setmathfont{Cambria Math}  % 与正文字体相适应的数学字体
 \renewcommand{\thefootnote}{\textbf{(\arabic{footnote})}}
-%% -------- pkg: 图表处理 --------
+%    \end{macrocode}
+%
+% 再引入对于图片、表格的支持、配置。
+%    \begin{macrocode}
 \RequirePackage{graphicx}
 \graphicspath{{./figure/}{./pic/}{./image}}
+\setlength{\textfloatsep}{6pt plus 2pt minus 4pt}
+\setlength{\intextsep}{6pt plus 2pt minus 2pt}
 \RequirePackage{longtable,booktabs}
 \RequirePackage{tikz}
 \usetikzlibrary{calc,backgrounds}
 \RequirePackage{tcolorbox,tabu}
 \tcbuselibrary{listings,theorems,skins}
-%% -------- pkg: 数学处理 --------
-\newcommand{\exercise}[1]{\tcbox[on line,top=0mm,bottom=0mm,right=0mm,left=0mm]{\bfseries 练习#1}\ }
-\newcommand{\note}{\textbf{注记}\ }
-\newcommand{\solve}{\textbf{解}\ }
-%% -------- pkg: 页面美化 --------
+%    \end{macrocode}
+%
+% 接下来，定义正文所需的一些特殊环境和命令。
+%    \begin{macrocode}
+\newcommand{\exercise}[1]{\noindent\tcbox[on line,top=0mm,bottom=0mm,%
+right=0mm,left=0mm]{\bfseries 练习#1}\ }
+\newcommand{\note}{\noindent\textbf{注记}\ }
+\newcommand{\solve}{\noindent\textbf{解}\ }
+\newcommand{\analysis}{\noindent\textbf{分析}\ }
+%    \end{macrocode}
+%
+% 再来利用\textsf{geometry}、\textsf{hyperref}、\textsf{fancyhdr}等宏包进行页面设计。
+% 首先调整页面尺寸。
+%    \begin{macrocode}
 \RequirePackage{geometry}
 \ifQYXF@smallersize
   \setlength{\paperwidth}{176mm}
@@ -148,6 +206,9 @@
   \geometry{a4paper}
 \fi
 \geometry{margin=1in}
+%    \end{macrocode}
+% 然后是超链接配置。
+%    \begin{macrocode}
 \RequirePackage{hyperref}
 \hypersetup{
     breaklinks,
@@ -160,8 +221,11 @@
     linktocpage,
     pageanchor=true
 }
+%    \end{macrocode}
+% 接着，利用\textsf{titlesec}和\textsf{titletoc}宏包进行标题设计，装饰来自于
+% \textsf{pgfornament-han}宏包。
+%    \begin{macrocode}
 \RequirePackage{pgfornament-han}
-%% -------- pkg: 标题目录 --------
 \ctexset{section={name={\S,}}}
 \RequirePackage{titlesec,titletoc}
 \titlecontents{chapter}[24pt]{\hspace{-2pc}\filright}
@@ -174,46 +238,54 @@
               {\contentspush{\thecontentslabel\ }\itshape}
               {}{\titlerule*[8pt]{}\contentspage}
 \setcounter{tocdepth}{2}
-%% -------- pkg: 页眉页脚 --------
+%    \end{macrocode}
+% 最后，设计页眉页脚。
+%    \begin{macrocode}
 \RequirePackage{fancyhdr}
 \fancyhead[EC]{\fangsong\nouppercase\leftmark}
 \fancyhead[OC]{\fangsong\nouppercase\rightmark}
 \fancyhead[EL,OR]{\bf\thepage}
 \fancyhead[ER,OL]{}
-\fancyfoot[C]{\textsc{Qian Yuan Xue Fu}\\\resizebox{0.2\linewidth}{1.5ex}{\pgfornamenthan[scale=0.05]{58}}}
+\fancyfoot[C]{\textsc{Qian Yuan Xue Fu}\\\resizebox{0.2\linewidth}{1.5ex}{%
+\pgfornamenthan[scale=0.05]{58}}}
 \fancypagestyle{plain}{%
 \fancyhf{}
-\fancyfoot[C]{\textsc{Qian Yuan Xue Fu}\\\resizebox{0.2\linewidth}{1.5ex}{\pgfornamenthan[scale=0.05]{58}}}
+\fancyfoot[C]{\textsc{Qian Yuan Xue Fu}\\\resizebox{0.2\linewidth}{1.5ex}{%
+\pgfornamenthan[scale=0.05]{58}}}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 }
 \setlength{\headheight}{13pt}
 \RequirePackage{lastpage}
-%% -------- pkg: 列表美化 --------
+%    \end{macrocode}
+%
+% 其余一些相对次要的功能，暂时未做延伸。
+%    \begin{macrocode}
 \RequirePackage{enumerate}
 \RequirePackage{pifont}
-%% -------- pkg: 附录设计 --------
 \RequirePackage{appendix}
 \ctexset{appendix={number={\Roman{chapter}}}}
-%% -------- pkg: 其他宏包 --------
 \RequirePackage[scale=1.1]{ccicons}
 %    \end{macrocode}
 %
 % \subsection{关键字参数生效处理}
 % 以下来处理关键字参数对排版效果的影响。
 %    \begin{macrocode}
-%% -------- kvp: 段距设置 --------
 \ifQYXF@parskip
      \setlength\parskip{0.3\baselineskip}
 \fi
 %    \end{macrocode}
+%
 % \subsection{首页制作}
-%% -------- sec: 首页设计 --------
+% 下面进行首页和封二的设计。首先，定义若干文档信息：
 %    \begin{macrocode}
 \newtoks\subtitle
 \newtoks\typo
 \newtoks\version
 \newtoks\sourcepage
+%    \end{macrocode}
+% 再重定义\textsf{\textbackslash maketitle}命令，以生成首页和封二。
+%    \begin{macrocode}
 \renewcommand*{\maketitle}{%
 \hypersetup{pageanchor=false}
 \begin{titlepage}
@@ -233,7 +305,7 @@ left=20pt]
 \vfill
 \texttt{钱学森书院学业辅导中心}\\[0.5\baselineskip]
 \textsc{Qian Yuan Xue Fu}\\[0.5\baselineskip]
-\includegraphics[width=0.5\textwidth]{name.png}
+{XI'AN JIAOTONG UNIVERSITY}
 \end{center}
 \begin{tikzpicture}[remember picture,overlay]
   \begin{pgfonlayer}{background}
@@ -254,8 +326,11 @@ left=20pt]
 \ding{228} \textbf{总页数：}\pageref{LastPage}
 \end{tcolorbox}
 \begin{tcolorbox}[title={\bfseries 许可证说明}]
-\centerline{\tcbox{\ccbyncnd\ \fangsong 知识共享 (Creative Commons) BY-NC-ND 4.0 协议}\\[0.3\baselineskip]}
-本作品采用 \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{\textbf{CC协议}}进行许可。使用者可以在给出\emph{作者署名及资料来源}的前提下对本作品进行\emph{转载}，但不得对本作品进行\emph{修改}，亦不得基于本作品进行\emph{二次创作}，不得将本作品运用于\emph{商业用途}。
+\centerline{\tcbox{\ccbyncnd\ \fangsong 知识共享 (Creative Commons) BY-NC-ND 4.0 协议}%
+\\[0.3\baselineskip]}
+本作品采用 \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{\textbf{CC协议}}
+进行许可。使用者可以在给出\emph{作者署名及资料来源}的前提下对本作品进行\emph{转载}，但不得对
+本作品进行\emph{修改}，亦不得基于本作品进行\emph{二次创作}，不得将本作品运用于\emph{商业用途}。
 \end{tcolorbox}
 \newcommand{\opensourceinfo}{根据作者的要求，本作品未公开源码。}
 \ifQYXF@opensource
@@ -268,13 +343,14 @@ left=20pt]
 \newpage
 }
 %    \end{macrocode}
+%
 % \subsection{目录制作}
-%% -------- sec: 目录设计 --------
+% 下面稍稍重定义目录的生成方式。
 %    \begin{macrocode}
 \renewcommand\tableofcontents{%
 \pagestyle{empty}
 \centerline{%
-\normalfont\Large\bfseries\contentsname%
+\normalfont\LARGE\bfseries\contentsname%
 \@mkboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}
 }
 \vskip 3ex%
@@ -283,6 +359,7 @@ left=20pt]
 \pagestyle{fancy}
 \setcounter{page}{1}
 }
+%</class>
 %    \end{macrocode}
-% 到此结束。
+% 到此，文档类的定义正式结束。
 % \Finale
