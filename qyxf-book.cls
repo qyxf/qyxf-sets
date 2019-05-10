@@ -29,16 +29,21 @@
 \ProvidesClass{qyxf-book}
   [2019/04/28 v1.0 nothing but a skeleton]
 \typeout{The book template provided by Qian Yuan Xue Fu}
+\newif\if@decoration
+\newif\if@opensource
+\DeclareOption{a4paper}{
+  \setlength\paperheight{297mm}%
+  \setlength\paperwidth{210mm}}
+\DeclareOption{b5paper}{
+  \setlength\paperheight{250mm}%
+  \setlength\paperwidth{176mm}}
+\DeclareOption{color}{}
+\DeclareOption{parskip}{
+  \setlength\parskip{0.3\baselineskip}}
+\DeclareOption{decoration}{\@decorationtrue}
+\DeclareOption{opensource}{\@opensourcetrue}
+\ProcessOptions
 \LoadClass[10pt,twoside,openany]{book}
-\RequirePackage{kvoptions}
-\SetupKeyvalOptions{family=QYXF,prefix=QYXF@,setkeys=\kvsetkeys}
-\DeclareBoolOption[false]{parskip}
-\DeclareBoolOption[false]{smallersize}
-\DeclareVoidOption{b5paper}{\kvsetkeys{QYXF}{smallersize}}
-\DeclareBoolOption{color}
-\DeclareBoolOption[true]{decoration}
-\DeclareBoolOption[false]{opensource}
-\ProcessKeyvalOptions*
 \RequirePackage[fontset=adobe,heading]{ctex}
 \setmainfont{Cambria}       % 目前默认使用的serif字体
 \setsansfont{Calibri}       % 目前默认使用的sans-serif字体
@@ -62,12 +67,6 @@ right=0mm,left=0mm]{\bfseries 练习#1}\ }
 \newcommand{\solve}{\noindent\textbf{解}\ }
 \newcommand{\analysis}{\noindent\textbf{分析}\ }
 \RequirePackage{geometry}
-\ifQYXF@smallersize
-  \setlength{\paperwidth}{176mm}
-  \setlength{\paperheight}{250mm}
-\else
-  \geometry{a4paper}
-\fi
 \geometry{margin=1in}
 \RequirePackage{hyperref}
 \hypersetup{
@@ -115,9 +114,6 @@ right=0mm,left=0mm]{\bfseries 练习#1}\ }
 \RequirePackage{appendix}
 \ctexset{appendix={number={\Roman{chapter}}}}
 \RequirePackage[scale=1.1]{ccicons}
-\ifQYXF@parskip
-     \setlength\parskip{0.3\baselineskip}
-\fi
 \newtoks\subtitle
 \newtoks\typo
 \newtoks\version
@@ -169,7 +165,7 @@ left=20pt]
 本作品进行\emph{修改}，亦不得基于本作品进行\emph{二次创作}，不得将本作品运用于\emph{商业用途}。
 \end{tcolorbox}
 \newcommand{\opensourceinfo}{根据作者的要求，本作品未公开源码。}
-\ifQYXF@opensource
+\if@opensource
   \begin{tcolorbox}
   本作品已发布于GitHub之上，发布地址为：\\
   \centerline{\the\sourcepage}
