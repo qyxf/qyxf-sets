@@ -52,14 +52,16 @@
 %
 %
 % \changes{v1.0}{2019/05/03}{初始版本，提供了基本的功能。}
+% \changes{v2.0}{2019/05/10}{将现有的qyxf-book文类与之前的qyxf-note和qyxf-notice
+% 文类合并于同一安装文件下，更名为qyxf宏集。}
 %
 % \GetFileInfo{\jobname.dtx}
 %
 % \DoNotIndex{}
-% \renewcommand{\filedate}{2019/05/03}
-% \renewcommand{\fileversion}{v1.0}
+% \renewcommand{\filedate}{2019/05/10}
+% \renewcommand{\fileversion}{v2.0}
 % \newcommand{\QYXF}{\fbox{QYXF}}
-% \title{\textsf{\jobname} 文档类： The \textsf{\jobname} class\thanks{本说明文档
+% \title{\textsf{\jobname} 宏集： The \textsf{\jobname} sets\thanks{本说明文档
 %   对应于 \textsf{\jobname}~\fileversion 版本，发布时间为\filedate.}}
 % \author{xjtu-blacksmith \\ \texttt{yjr134@163.com}}
 % \date{\filedate}
@@ -81,9 +83,9 @@
 % 不计划对一般用户开放（和优化）。
 %
 % \section{使用}
-% 在\verb|\documenclass|命令中引用\textsf{\jobname}文档类即可。
+% 在\verb|\documenclass|命令中引用对应的文档类即可。
 %
-% \subsection{文类选项}
+% \subsection{qyxf-book 文类选项}
 % 本文类提供了以下几个可选项：
 %
 % \begin{description}
@@ -132,13 +134,13 @@
 %
 % \StopEventually{\PrintIndex}
 %
-% \section{实现}
+% \section{qyxf-book 文类实现}
 %   以下展示本模板的实现细节。
 %
 % \subsection{准备工作}
 % 首先是必要的声明与对基本文类的加载。
 %    \begin{macrocode}
-%<*class>
+%<*book>
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesClass{qyxf-book}
   [2019/04/28 v1.0 nothing but a skeleton]
@@ -359,7 +361,58 @@ left=20pt]
 \pagestyle{fancy}
 \setcounter{page}{1}
 }
-%</class>
+%</book>
 %    \end{macrocode}
 % 到此，文档类的定义正式结束。
+%
+% \section{qyxf-note 文类实现}
+%    \begin{macrocode}
+%<note*>
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{qyxf-notice}[2019/05/10 Template for qyxf's note]
+\LoadClass[12pt,oneside]{article}
+%</note>
+%    \end{macrocode}
+%
+% \section{qyxf-notice 文类实现}
+%    \begin{macrocode}
+%<notice*>
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{qyxf-notice}[2019/04/17 Template for qyxf's notice]
+\LoadClass[12pt,a5paper,onecolumn,oneside]{article}
+
+\RequirePackage[margin=1cm,bottom=2.5cm]{geometry}
+\RequirePackage[fontset=adobe]{ctex}
+\RequirePackage{fontspec}
+\setmainfont{Cambria}
+
+\RequirePackage{graphicx}
+\graphicspath{{images/}}
+\RequirePackage{pgfornament}
+
+\RequirePackage{fancyhdr}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\cfoot{%
+\hrule\vskip\baselineskip
+\centering\includegraphics[width=0.55\textwidth]{name.png}
+}
+
+\renewcommand{\maketitle}{
+\centerline{\Large\fbox{\itshape QyxF$\ \spadesuit$} {\kaishu 钱学森书院学业辅导中心}}%
+%\vskip0.2\baselineskip
+\begin{center}
+\begin{tikzpicture}
+\node (A) at (0.2\textwidth,0) {};
+\node (B) at (0.8\textwidth,0) {};
+\draw (A) to [ornament=88] (B);
+\end{tikzpicture}
+\end{center}
+\vskip0.5\baselineskip
+\centerline{\LARGE\bfseries\@title}
+\vskip\baselineskip
+\thispagestyle{fancy}
+}
+%</notice>
+%    \end{macrocode}
 % \Finale
