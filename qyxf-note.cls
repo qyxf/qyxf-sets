@@ -65,7 +65,7 @@
 \else
   \definecolor{mycolor}{RGB}{0,0,0}
 \fi
-\RequirePackage[fontset=adobe,heading]{ctex}
+\RequirePackage[fontset=adobe]{ctex}
 \RequirePackage{amsmath,fourier}
 \RequirePackage{graphicx,booktabs,longtable}
 \graphicspath{{images/}}
