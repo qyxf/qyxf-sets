@@ -27,8 +27,9 @@
 %% -----------------------------------
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesClass{qyxf-book}
-  [2019/04/28 v1.0 nothing but a skeleton]
+  [2019/05/11 v1.1a Template for qyxf's book]
 \typeout{The book template provided by Qian Yuan Xue Fu}
+\LoadClass[10pt,twoside,openany]{book}
 \newif\if@decoration
 \newif\if@opensource
 \DeclareOption{a4paper}{
@@ -43,7 +44,7 @@
 \DeclareOption{decoration}{\@decorationtrue}
 \DeclareOption{opensource}{\@opensourcetrue}
 \ProcessOptions
-\LoadClass[10pt,twoside,openany]{book}
+
 \RequirePackage[fontset=adobe,heading]{ctex}
 \setmainfont{Cambria}       % 目前默认使用的serif字体
 \setsansfont{Calibri}       % 目前默认使用的sans-serif字体
@@ -70,16 +71,15 @@ right=0mm,left=0mm]{\bfseries 练习#1}\ }
 \geometry{margin=1in}
 \RequirePackage{hyperref}
 \hypersetup{
-    breaklinks,
-    unicode,
-    linktoc=all,
-    bookmarksnumbered=true,
-    bookmarksopen=true,
-    pdfkeywords={qyxf-book},
-    pdfborder={0 0 0},
-    linktocpage,
-    pageanchor=true
-}
+  breaklinks,
+  unicode,
+  linktoc=all,
+  bookmarksnumbered=true,
+  bookmarksopen=true,
+  pdfkeywords={qyxf-book},
+  pdfborder={0 0 0},
+  linktocpage,
+  pageanchor=true}
 \RequirePackage{pgfornament-han}
 \ctexset{section={name={\S,}}}
 \RequirePackage{titlesec,titletoc}
@@ -164,7 +164,6 @@ left=20pt]
 进行许可。使用者可以在给出\emph{作者署名及资料来源}的前提下对本作品进行\emph{转载}，但不得对
 本作品进行\emph{修改}，亦不得基于本作品进行\emph{二次创作}，不得将本作品运用于\emph{商业用途}。
 \end{tcolorbox}
-\newcommand{\opensourceinfo}{根据作者的要求，本作品未公开源码。}
 \if@opensource
   \begin{tcolorbox}
   本作品已发布于GitHub之上，发布地址为：\\
@@ -186,6 +185,7 @@ left=20pt]
 \pagestyle{fancy}
 \setcounter{page}{1}
 }
+
 \endinput
 %%
 %% End of file `qyxf-book.cls'.

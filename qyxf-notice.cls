@@ -28,16 +28,13 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{qyxf-notice}[2019/04/17 Template for qyxf's notice]
 \LoadClass[12pt,a5paper,onecolumn,oneside]{article}
-
 \RequirePackage[margin=1cm,bottom=2.5cm]{geometry}
 \RequirePackage[fontset=adobe]{ctex}
 \RequirePackage{fontspec}
 \setmainfont{Cambria}
-
 \RequirePackage{graphicx}
 \graphicspath{{images/}}
 \RequirePackage{pgfornament}
-
 \RequirePackage{fancyhdr}
 \fancyhf{}
 \renewcommand{\headrulewidth}{0pt}
@@ -45,7 +42,6 @@
 \hrule\vskip\baselineskip
 \centering\includegraphics[width=0.55\textwidth]{name.png}
 }
-
 \renewcommand{\maketitle}{
 \centerline{\Large\fbox{\itshape QyxF$\ \spadesuit$} {\kaishu 钱学森书院学业辅导中心}}%
 \begin{center}
@@ -60,6 +56,7 @@
 \vskip\baselineskip
 \thispagestyle{fancy}
 }
+
 \endinput
 %%
 %% End of file `qyxf-notice.cls'.
