@@ -193,6 +193,7 @@
 \LoadClass[10pt,twoside,openany]{book}
 \newif\if@decoration
 \newif\if@opensource
+\newif\if@sourcefont
 \DeclareOption{a4paper}{
   \setlength\paperheight{297mm}%
   \setlength\paperwidth{210mm}}
@@ -204,15 +205,24 @@
   \setlength\parskip{0.3\baselineskip}}
 \DeclareOption{decoration}{\@decorationtrue}
 \DeclareOption{opensource}{\@opensourcetrue}
+\DeclareOption{sourcefont}{\@sourcefonttrue}
 \ProcessOptions
 
 %    \end{macrocode}
 %
 % \subsection{设计实现}
-% 接下来，由\textsf{ctex}宏包引入对中文的支持，并配置字体。
+% 接下来，由\textsf{ctex}宏包引入对中文的支持，并配置字体。当\textsf{sourcefont}选项
+% 打开时，将中文字体配置为思源字体；否则，使用\textsf{ctex}宏集的默认配置。
 %
 %    \begin{macrocode}
-\RequirePackage[fontset=adobe,heading]{ctex}
+\if@sourcefont
+  \RequirePackage[SlantFont]{xeCJK}
+  \RequirePackage[heading]{ctex}
+  \setCJKmainfont{思源宋体}
+  \setCJKsansfont{思源黑体}
+\else
+  \RequirePackage[heading]{ctex}
+\fi
 \setmainfont{Cambria}       % 目前默认使用的serif字体
 \setsansfont{Calibri}       % 目前默认使用的sans-serif字体
 \setmonofont{Courier New}   % 目前默认使用的等宽字体
