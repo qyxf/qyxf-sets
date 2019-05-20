@@ -31,7 +31,7 @@
 %</driver>
 % \fi
 %
-% \CheckSum{575}
+% \CheckSum{576}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -403,7 +403,8 @@ left=20pt]
 本作品进行\emph{修改}，亦不得基于本作品进行\emph{二次创作}，不得将本作品运用于\emph{商业用途}。
 \end{tcolorbox}
 %    \end{macrocode}
-% 最后是开源信息的盒子，该盒子仅在\textsf{opensource}选项打开时显示。
+%
+% 输出开源信息的盒子，该盒子仅在\textsf{opensource}选项打开时显示。
 %    \begin{macrocode}
 \if@opensource
   \begin{tcolorbox}
@@ -412,7 +413,12 @@ left=20pt]
   本作品的版本号为\textsf{\the\version}。
   \end{tcolorbox}
 \fi
+%    \end{macrocode}
+%
+% 最后，新启一页，并将页面样式还原为有装饰的\textsf{fancy}风格。
+%    \begin{macrocode}
 \newpage
+\pagestyle{fancy}
 }
 %    \end{macrocode}
 %
