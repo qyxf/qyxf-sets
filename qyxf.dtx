@@ -77,10 +77,10 @@
 % \section{简介}
 %
 % \textsf{\jobname}宏集是由\textbf{钱院学辅}
-% \footnote{全称为西安交通大学钱学森书院学业辅导中心，是西安交通大学学业辅导中心在钱学森
-% 书院的下属机构，主要负责对本书院的同学开展学业辅导工作，资料的整理与排印是钱院学辅的一
-% 项重要工作。钱院学辅在GitHub上的组织页面为\url{https://github.com/qyxf/}。在发布相
-% 关开源内容时，“钱院学辅”这一名称常用英文记为 Qian Yuan Xue Fu ，或直接缩记为
+% \footnote{全称为\textit{西安交通大学钱学森书院学业辅导中心}，是西安交通大学学业辅导中
+% 心在钱学森书院的下属机构，主要负责对本书院的同学开展学业辅导工作，资料的整理与排印是
+% 钱院学辅的一项重要工作。钱院学辅在GitHub上的组织页面为\url{https://github.com/qyxf/}。
+% 在发布相关开源内容时，“钱院学辅”这一名称常用英文记为 Qian Yuan Xue Fu ，或直接缩记为
 % \textsf{qyxf} 。}
 % 设计的一系列\LaTeX{}文类。其目前包括下面三个分立的文类：
 % \begin{enumerate}
@@ -91,6 +91,10 @@
 %   的一个轻量级文本文类。
 % \item \textsf{qyxf-notice} 文类：通知公告文类，用于钱院学辅排印纸质版本的公告。
 % \end{enumerate}
+%
+% 在各个文类的设计过程中，参考了其他一些已经成熟的设计，如\LaTeX{}系统默认的
+% \textsf{book}文类，以及Elegant\LaTeX{}\footnote{\url{https://elegantlatex.org/}}
+% 出品的ElegantBook文类和ElegantNote文类。
 %
 % 目前，本宏集暂由钱院学辅学研部的\textsf{xjtu-blacksmith}维护。在相关机制完善后，将把
 % 此套宏集交由一个可持续运转的工作小组进行长期维护与发展。
@@ -107,6 +111,10 @@
 % \item[\textsf{a4paper},\textsf{b5paper}] 
 %   分别要求页面使用常规的A4纸张尺寸（210mm*297mm）或比A4更小的B5纸张尺寸（176mm*250mm）
 %   进行页面设计。默认使用\textsf{a4paper}。
+% \item[\textsf{sourcefont}] 使用开源的思源宋体（Source Han Serif
+% \footnote{\url{https://github.com/adobe-fonts/source-han-serif}}）/思源黑体
+% （Source Han Sans\footnote{\url{https://github.com/adobe-fonts/source-han-sans}}）
+% 的字体组合方案替代\textsf{ctex}宏包为本文类默认指定的字体方案（本机上应装有相应字体）。默认关。
 % \item[\textsf{parskip}] 增加使段落间更为宽敞的的段距（目前设定值为0.3倍基准行距）。默认关。
 % \item[\textsf{color}] 使用有颜色的主题进行排版。默认关。（目前此功能尚未实现）
 % \item[\textsf{decoration}] 增加一些页面装饰。默认开。（目前尚未实现关闭功能）
@@ -165,7 +173,8 @@
 % \item 不建议在\textsf{qyxf-book}下使用\textsf{part}级别的标题，因该文类从未定义过
 % \textsf{part}标题对应的样式和目录样式。此外，针对于钱院学辅目前所排印的书籍而言，这一
 % 级的标题无疑是多余了，无论是对作者还是读者而言。
-% \item 在各个文类中，中文均采用Adobe系列的字体；在\textsf{qyxf-book}文类中的英文采用
+% \item 在各个文类中，中文采用\textsf{ctex}所指定的默认字体，在\textsf{qyxf-book}中
+% 可以通过\textsf{sourcefont}更换为思源系列字体；在\textsf{qyxf-book}文类中的英文采用
 % Cambria和Calibri的组合，数学字体采用Cambria Math（由\textsf{unicode-math}宏包驱动）
 % ；在\textsf{qyxf-note}文类中，英文及数学字体统一采用由\textsf{fourier}宏包设定的
 % Adobe Utopia字体。如无特殊情况，不建议用户更换字体。
@@ -207,7 +216,6 @@
 \DeclareOption{opensource}{\@opensourcetrue}
 \DeclareOption{sourcefont}{\@sourcefonttrue}
 \ProcessOptions
-
 %    \end{macrocode}
 %
 % \subsection{设计实现}
