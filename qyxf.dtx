@@ -282,7 +282,11 @@ right=0mm,left=0mm]{\bfseries 练习#1}\ }
   linktoc=all,
   bookmarksnumbered=true,
   bookmarksopen=true,
-  pdfkeywords={qyxf-book},
+  pdfauthor=\@author, 
+  pdftitle=\@title,
+  pdfsubject={\@author: \@title - \the\subtitle},
+  pdfkeywords={qyxf,book},
+  pdfcreator={XeLaTeX with qyxf-book class}
   pdfborder={0 0 0},
   linktocpage,
   pageanchor=true}
@@ -538,16 +542,19 @@ left=20pt]
 %    \begin{macrocode}
 \RequirePackage{hyperref,fancyhdr}
 \hypersetup{
-    breaklinks,
-    unicode,
-    linktoc=all,
-    bookmarksnumbered=true,
-    bookmarksopen=true,
-    pdfkeywords={qyxf-book},
-    pdfborder={0 0 0},
-    linktocpage,
-    pageanchor=true
-}
+  breaklinks,
+  unicode,
+  linktoc=all,
+  bookmarksnumbered=true,
+  bookmarksopen=true,
+  pdfauthor=\@author, 
+  pdftitle=\@title,
+  pdfsubject={\@author: \@title - \the\subtitle},
+  pdfkeywords={qyxf,note},
+  pdfcreator={XeLaTeX with qyxf-note class}
+  pdfborder={0 0 0},
+  linktocpage,
+  pageanchor=true}
 \renewcommand{\thefootnote}{\textbf{(\arabic{footnote})}}
 \fancyhf{}
 \pagestyle{fancy}
