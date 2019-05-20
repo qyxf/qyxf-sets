@@ -282,11 +282,6 @@ right=0mm,left=0mm]{\bfseries 练习#1}\ }
   linktoc=all,
   bookmarksnumbered=true,
   bookmarksopen=true,
-  pdfauthor=\@author, 
-  pdftitle=\@title,
-  pdfsubject={\@author: \@title - \the\subtitle},
-  pdfkeywords={qyxf,book},
-  pdfcreator={XeLaTeX with qyxf-book class}
   pdfborder={0 0 0},
   linktocpage,
   pageanchor=true}
@@ -346,10 +341,19 @@ right=0mm,left=0mm]{\bfseries 练习#1}\ }
 \newtoks\version
 \newtoks\sourcepage
 %    \end{macrocode}
-% 再重定义\textsf{\textbackslash maketitle}命令，以生成首页和封二。
+%
+% 重定义\textsf{\textbackslash maketitle}命令，以生成首页和封二。在此处配置文档的
+% 元数据。
 %    \begin{macrocode}
 \renewcommand*{\maketitle}{%
-\hypersetup{pageanchor=false}
+\hypersetup{
+  pageanchor=false,
+  pdfauthor=\@author, 
+  pdftitle=\@title,
+  pdfsubject={\@author: \@title - \the\subtitle},
+  pdfkeywords={qyxf, book},
+  pdfcreator={XeLaTeX with qyxf-book class}
+}
 %    \end{macrocode}
 %
 % 设置标题页，先将首页顶部下放一些空间。
@@ -547,11 +551,6 @@ left=20pt]
   linktoc=all,
   bookmarksnumbered=true,
   bookmarksopen=true,
-  pdfauthor=\@author, 
-  pdftitle=\@title,
-  pdfsubject={\@author: \@title - \the\subtitle},
-  pdfkeywords={qyxf,note},
-  pdfcreator={XeLaTeX with qyxf-note class}
   pdfborder={0 0 0},
   linktocpage,
   pageanchor=true}
@@ -618,9 +617,18 @@ left=0mm,colframe=mycolor!90!white,colback=mycolor!5!white]{\bfseries 练习#1}\
 %
 % \subsection{发布页与标题设计}
 % 最后进行发布页与标题的设计，它们都承载于重定义的\textsf{\textbackslash maketitle}命令
-% 之下。
+% 之下。首先配置文档的元数据。
 %    \begin{macrocode}
 \renewcommand*{\maketitle}{
+\hypersetip{
+  pageanchor=false,
+  pdfauthor=\@author, 
+  pdftitle=\@title,
+  pdfsubject={\@author: \@title - \the\subtitle},
+  pdfkeywords={qyxf,note},
+  pdfcreator={XeLaTeX with qyxf-note class}
+}
+
 %    \end{macrocode}
 %
 % 若\textsf{publishpage}选项打开，则生成发布页，在其上配置与\textsf{qyxf-book}的封二
