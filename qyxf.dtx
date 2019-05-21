@@ -211,7 +211,7 @@
   \setlength\paperwidth{176mm}}
 \DeclareOption{color}{}
 \DeclareOption{parskip}{
-  \setlength\parskip{0.3\baselineskip}}
+  \setlength\parskip{0.2\baselineskip}}
 \DeclareOption{decoration}{\@decorationtrue}
 \DeclareOption{opensource}{\@opensourcetrue}
 \DeclareOption{sourcefont}{\@sourcefonttrue}
@@ -261,9 +261,9 @@
 %    \begin{macrocode}
 \newcommand{\exercise}[1]{\noindent\tcbox[on line,top=0mm,bottom=0mm,%
 right=0mm,left=0mm]{\bfseries 练习#1}\ }
-\newcommand{\note}{\textbf{注记}\ }
-\newcommand{\solve}{\textbf{解}\ }
-\newcommand{\analysis}{\textbf{分析}\ }
+\newcommand{\note}{\noindent\textbf{注记}\ }
+\newcommand{\solve}{\noindent\textbf{解}\ }
+\newcommand{\analysis}{\noindent\textbf{分析}\ }
 %    \end{macrocode}
 %
 % 利用\textsf{geometry}、\textsf{hyperref}、\textsf{fancyhdr}等宏包进行页面设计。
@@ -367,12 +367,12 @@ right=0mm,left=0mm]{\bfseries 练习#1}\ }
 \begin{center}\large
 \begin{tcolorbox}[blanker,borderline west={1mm}{0pt}{black!80},%
 left=20pt]
-{\fontsize{40pt}{\baselineskip}\selectfont\bfseries\@title}\\[\baselineskip]
+{\fontsize{40pt}{\baselineskip}\selectfont\bfseries\@title}\\[0.5\baselineskip]
 {\Huge\itshape\the\subtitle}
 \end{tcolorbox}
 \begin{tcolorbox}[blanker,borderline west={1mm}{0pt}{black!50},%
 left=20pt]
-{\Large 作者：\@author\\[0.3\baselineskip]
+{\Large 作者：\@author\\[0.2\baselineskip]
 \@date}
 \end{tcolorbox}
 %    \end{macrocode}
@@ -610,9 +610,9 @@ circular drop shadow] circle (2pt);}
 %    \begin{macrocode}
 \newcommand{\exercise}[1]{\noindent\tcbox[on line,top=0mm,bottom=0mm,right=0mm,%
 left=0mm,colframe=mycolor!90!white,colback=mycolor!5!white]{\bfseries 练习#1}\ }
-\newcommand{\note}{\textbf{注记}\ }
-\newcommand{\solve}{\textbf{解}\ }
-\newcommand{\analysis}{\textbf{分析}\ }
+\newcommand{\note}{\noindent\textbf{注记}\ }
+\newcommand{\solve}{\noindent\textbf{解}\ }
+\newcommand{\analysis}{\noindent\textbf{分析}\ }
 %    \end{macrocode}
 %
 % \subsection{发布页与标题设计}
