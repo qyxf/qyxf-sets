@@ -286,12 +286,20 @@ right=0mm,left=0mm]{\bfseries 练习#1}\ }
   linktocpage,
   pageanchor=true}
 %    \end{macrocode}
+%
+% \changes{v2.1}{2019/05/26}{初步设计\textsf{chapter}级别的标题样式。}
+%
 % 接着，利用\textsf{titlesec}和\textsf{titletoc}宏包进行标题与目录设计，装饰来自于
 % \textsf{pgfornament-han}宏包。
 %    \begin{macrocode}
 \RequirePackage{pgfornament-han}
+\RequirePackage{pgfornament}
 \ctexset{section={name={\S,}}}
 \RequirePackage{titlesec,titletoc}
+\newcommand{\decoration}{\vspace{-.3\baselineskip}\pgfornamenthan[scale=0.2,symmetry=h]{60}}
+\titleformat{\chapter}[block]{\centering\bfseries\Huge}{\CTEXthechapter}
+{1em}{}[\centering\decoration]%
+\titlespacing{\chapter}{0pt}{*1}{*4}
 \titlecontents{chapter}[24pt]{\hspace{-2pc}\filright}
               {\normalsize\bfseries\contentspush{\thecontentslabel\ }}
               {}{\bfseries\titlerule*[8pt]{.}\contentspage}
