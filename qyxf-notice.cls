@@ -29,7 +29,7 @@
 \ProvidesClass{qyxf-notice}[2019/04/17 Template for qyxf's notice]
 \LoadClass[12pt,a5paper,onecolumn,oneside]{article}
 \RequirePackage[margin=1cm,bottom=2.5cm]{geometry}
-\RequirePackage[fontset=adobe]{ctex}
+\RequirePackage{ctex}
 \RequirePackage{fontspec}
 \setmainfont{Cambria}
 \RequirePackage{graphicx}

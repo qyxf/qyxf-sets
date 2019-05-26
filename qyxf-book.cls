@@ -27,11 +27,12 @@
 %% -----------------------------------
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesClass{qyxf-book}
-  [2019/05/11 v1.1a Template for qyxf's book]
+  [2019/05/26 v2.1 Template for qyxf's book]
 \typeout{The book template provided by Qian Yuan Xue Fu}
 \LoadClass[10pt,twoside,openany]{book}
 \newif\if@decoration
 \newif\if@opensource
+\newif\if@sourcefont
 \DeclareOption{a4paper}{
   \setlength\paperheight{297mm}%
   \setlength\paperwidth{210mm}}
@@ -40,12 +41,19 @@
   \setlength\paperwidth{176mm}}
 \DeclareOption{color}{}
 \DeclareOption{parskip}{
-  \setlength\parskip{0.3\baselineskip}}
+  \setlength\parskip{0.2\baselineskip}}
 \DeclareOption{decoration}{\@decorationtrue}
 \DeclareOption{opensource}{\@opensourcetrue}
+\DeclareOption{sourcefont}{\@sourcefonttrue}
 \ProcessOptions
-
-\RequirePackage[fontset=adobe,heading]{ctex}
+\if@sourcefont
+  \RequirePackage[SlantFont]{xeCJK}
+  \RequirePackage[heading]{ctex}
+  \setCJKmainfont{思源宋体}
+  \setCJKsansfont{思源黑体}
+\else
+  \RequirePackage[heading]{ctex}
+\fi
 \setmainfont{Cambria}       % 目前默认使用的serif字体
 \setsansfont{Calibri}       % 目前默认使用的sans-serif字体
 \setmonofont{Courier New}   % 目前默认使用的等宽字体
@@ -76,13 +84,17 @@ right=0mm,left=0mm]{\bfseries 练习#1}\ }
   linktoc=all,
   bookmarksnumbered=true,
   bookmarksopen=true,
-  pdfkeywords={qyxf-book},
   pdfborder={0 0 0},
   linktocpage,
   pageanchor=true}
 \RequirePackage{pgfornament-han}
+\RequirePackage{pgfornament}
 \ctexset{section={name={\S,}}}
 \RequirePackage{titlesec,titletoc}
+\newcommand{\decoration}{\vspace{-.3\baselineskip}\pgfornamenthan[scale=0.2,symmetry=h]{60}}
+\titleformat{\chapter}[block]{\centering\bfseries\Huge}{\CTEXthechapter}
+{1em}{}[\centering\decoration]%
+\titlespacing{\chapter}{0pt}{*1}{*4}
 \titlecontents{chapter}[24pt]{\hspace{-2pc}\filright}
               {\normalsize\bfseries\contentspush{\thecontentslabel\ }}
               {}{\bfseries\titlerule*[8pt]{.}\contentspage}
@@ -119,19 +131,26 @@ right=0mm,left=0mm]{\bfseries 练习#1}\ }
 \newtoks\version
 \newtoks\sourcepage
 \renewcommand*{\maketitle}{%
-\hypersetup{pageanchor=false}
+\hypersetup{
+  pageanchor=false,
+  pdfauthor=\@author,
+  pdftitle=\@title,
+  pdfsubject={\@author: \@title - \the\subtitle},
+  pdfkeywords={qyxf, book},
+  pdfcreator={XeLaTeX with qyxf-book class}
+}
 \begin{titlepage}
 \phantom{s}
 \vspace{3cm}
 \begin{center}\large
 \begin{tcolorbox}[blanker,borderline west={1mm}{0pt}{black!80},%
 left=20pt]
-{\fontsize{40pt}{\baselineskip}\selectfont\bfseries\@title}\\[\baselineskip]
+{\fontsize{40pt}{\baselineskip}\selectfont\bfseries\@title}\\[0.5\baselineskip]
 {\Huge\itshape\the\subtitle}
 \end{tcolorbox}
 \begin{tcolorbox}[blanker,borderline west={1mm}{0pt}{black!50},%
 left=20pt]
-{\Large 作者：\@author\\[0.3\baselineskip]
+{\Large 作者：\@author\\[0.2\baselineskip]
 \@date}
 \end{tcolorbox}
 \vfill
@@ -161,8 +180,8 @@ left=20pt]
 \centerline{\tcbox{\ccbyncnd\ \fangsong 知识共享 (Creative Commons) BY-NC-ND 4.0 协议}%
 \\[0.3\baselineskip]}
 本作品采用 \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{\textbf{CC协议}}
-进行许可。使用者可以在给出\emph{作者署名及资料来源}的前提下对本作品进行\emph{转载}，但不得对
-本作品进行\emph{修改}，亦不得基于本作品进行\emph{二次创作}，不得将本作品运用于\emph{商业用途}。
+进行许可。使用者可以在给出作者署名及资料来源的前提下对本作品进行转载，但不得对本作品进行
+修改，亦不得基于本作品进行二次创作，不得将本作品运用于商业用途。
 \end{tcolorbox}
 \if@opensource
   \begin{tcolorbox}
@@ -172,6 +191,7 @@ left=20pt]
   \end{tcolorbox}
 \fi
 \newpage
+\pagestyle{fancy}
 }
 \renewcommand\tableofcontents{%
 \pagestyle{empty}

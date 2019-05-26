@@ -26,12 +26,13 @@
 %% 
 %% -----------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{qyxf-note}[2019/05/11 v1.0a Template for qyxf's note]
+\ProvidesClass{qyxf-note}[2019/05/11 v2.1 Template for qyxf's note]
 \LoadClass[12pt,oneside]{article}
 \newif\if@color
 \newif\if@screen
 \newif\if@opensource
 \newif\if@publishpage
+\newif\if@sourcefont
 \DeclareOption{mobile}{
   \setlength\paperwidth{4in}
   \setlength\paperheight{6in}
@@ -49,6 +50,7 @@
 \DeclareOption{opensource}{\@opensourcetrue}
 \DeclareOption{publishpage}{\@publishpagetrue}
 \DeclareOption{nopublishpage}{\@publishpagefalse}
+\DeclareOption{sourcefont}{\@sourcefonttrue}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ExecuteOptions{a5paper,color,publishpage}
 \ProcessOptions\relax
@@ -65,22 +67,26 @@
 \else
   \definecolor{mycolor}{RGB}{0,0,0}
 \fi
-\RequirePackage[fontset=adobe]{ctex}
-\RequirePackage{amsmath,fourier}
+\if@sourcefont
+  \RequirePackage[SlantFont]{xeCJK}
+  \RequirePackage[heading]{ctex}
+  \setCJKmainfont{思源宋体}
+  \setCJKsansfont{思源黑体}
+\else
+  \RequirePackage[heading]{ctex}
+\fi\RequirePackage{amsmath,fourier}
 \RequirePackage{graphicx,booktabs,longtable}
 \graphicspath{{images/}}
 \RequirePackage{hyperref,fancyhdr}
 \hypersetup{
-    breaklinks,
-    unicode,
-    linktoc=all,
-    bookmarksnumbered=true,
-    bookmarksopen=true,
-    pdfkeywords={qyxf-book},
-    pdfborder={0 0 0},
-    linktocpage,
-    pageanchor=true
-}
+  breaklinks,
+  unicode,
+  linktoc=all,
+  bookmarksnumbered=true,
+  bookmarksopen=true,
+  pdfborder={0 0 0},
+  linktocpage,
+  pageanchor=true}
 \renewcommand{\thefootnote}{\textbf{(\arabic{footnote})}}
 \fancyhf{}
 \pagestyle{fancy}
@@ -113,8 +119,6 @@ circular drop shadow] circle (2pt);}
 \setlist[enumerate,4]{label=\color{mycolor}(\roman*),font=\bfseries}
 \setlist[itemize,1]{label={\eBall}}
 \setlist[itemize,2]{label={\eShadow}}
-%% source1: https://tex.stackexchange.com/questions/41408/a-five-level-deep-list
-%% source2: https://tex.stackexchange.com/questions/318199/change-color-of-itemize-bullet
 \newtoks\subtitle
 \newtoks\typo
 \newtoks\version
@@ -125,6 +129,15 @@ left=0mm,colframe=mycolor!90!white,colback=mycolor!5!white]{\bfseries 练习#1}\
 \newcommand{\solve}{\noindent\textbf{解}\ }
 \newcommand{\analysis}{\noindent\textbf{分析}\ }
 \renewcommand*{\maketitle}{
+\hypersetup{
+  pageanchor=false,
+  pdfauthor=\@author,
+  pdftitle=\@title,
+  pdfsubject={\@author: \@title - \the\subtitle},
+  pdfkeywords={qyxf,note},
+  pdfcreator={XeLaTeX with qyxf-note class}
+}
+
   \if@publishpage
     \setcounter{page}{0}
     \hspace{1em}\vfill
@@ -140,9 +153,8 @@ left=0mm,colframe=mycolor!90!white,colback=mycolor!5!white]{\bfseries 练习#1}\
     本作品采用\textbf{知识共享 (Creative Commons) BY-NC-ND 4.0 协议}%
     \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{\tcbox[on line,%
     colframe=mycolor!90!white,colback=mycolor!5!white,left=0pt,right=0pt,top=0pt,%
-    bottom=0pt]{\ccbyncnd}}进行许可。使用者可以在给出\emph{作者署名及资料来源}的前提
-    下对本作品进行\emph{转载}，但不得对本作品进行\emph{修改}，亦不得基于本作品进行
-    \emph{二次创作}，不得将本作品运用于\emph{商业用途}。
+    bottom=0pt]{\ccbyncnd}}进行许可。使用者可以在给出作者署名及资料来源的前提下对本作品进行转载，
+    但不得对本作品进行修改，亦不得基于本作品进行二次创作，不得将本作品运用于商业用途。
     \end{tcolorbox}
     \if@opensource
       \begin{tcolorbox}[colframe=mycolor!90!white,colback=mycolor!5!white]
