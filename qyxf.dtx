@@ -182,6 +182,27 @@
 % 的清单。
 % \end{enumerate}
 %
+% \section{未来更新计划}
+%
+% 以下列出\textsf{qyxf}系列文类的未来更新计划。由于钱院学辅目前在\LaTeX{}的整体使用经验
+% 方面还比较薄弱，因此这一系列的文类离完善、耐用还有很长的距离，需要在之后不断完善。如果
+% 您对于本文类有什么好的建议或特别的感受，欢迎通过维护者的邮箱\footnote{见封面的作者信息栏。}
+% 或钱院学辅的公共邮箱\footnote{\url{mailto:qianxiaofu.mail@qq.com}}联系我们，我们将
+% 非常感激！
+%
+% \begin{enumerate}
+%   \item 在\textsf{qyxf-book}的\textsf{sourcefont}开启时，为了开启斜体字选项，目前
+% 通过先后调用\textsf{xeCJK}（带斜体选项）和\textsf{ctex}宏包的方式实现，导致后者重新
+% 调用\textsf{xeCJK}宏包时会花较长的时间重定义字体，占用大量编译时间。计划在将来用更为
+% 理想的方式解决这一问题。
+%   \item \textsf{qyxf-notice}文类的设计已经过时，需要进行大幅度的修改。
+%   \item 目前采用的\textsf{tcolorbox}样式基本上还是默认样式，需要根据目前的需要做重新
+% 的设计。
+%   \item 章节标题的样式和实现方式有待进一步改善。
+%   \item \textsf{qyxf-note}的样式有待进一步美化和精简。
+%   \item 说明文档的索引功能有待完善。
+% \end{enumerate}
+%
 % \StopEventually{\PrintIndex}
 %
 % \section{qyxf-book 文类实现}
