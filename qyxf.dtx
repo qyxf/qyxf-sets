@@ -26,12 +26,14 @@
 \RecordChanges
 \begin{document}
 \DocInput{\jobname.dtx}
+\IndexLayout
 \PrintChanges
+\PrintIndex
 \end{document}
 %</driver>
 % \fi
 %
-% \CheckSum{582}
+% \CheckSum{606}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -54,12 +56,14 @@
 % \changes{v2.0}{2019/05/10}{将现有的qyxf-book文类与之前的qyxf-note和qyxf-notice
 % 文类合并于同一安装文件下，更名为qyxf宏集。}
 % \changes{v2.0a}{2019/05/11}{完善了说明文档的内容，并对各文类的内容稍作了调整。}
+% \changes{v2.1}{2019/05/26}{移除了不合用的字体设置，修改了标题样式，并优化了文档的
+% 结构。}
 %
 % \GetFileInfo{\jobname.dtx}
 %
 % \DoNotIndex{}
-% \renewcommand{\filedate}{2019/05/11}
-% \renewcommand{\fileversion}{v2.0a}
+% \renewcommand{\filedate}{2019/05/26}
+% \renewcommand{\fileversion}{v2.1}
 % \title{\textsf{\jobname} 宏集： The \textsf{\jobname} sets\thanks{本说明文档
 %   对应于\textsf{\jobname}宏集的~\fileversion 版本，发布时间为\filedate.}}
 % \author{xjtu-blacksmith \\ \texttt{yjr134@163.com}}
@@ -73,6 +77,8 @@
 %   \textsf{qyxf-notice}，分别用于正规出品物和一般资料的排版，提供有多个可选项。目前，
 %   书籍与通知文类不计划对一般用户开放（和优化），而笔记文类可提供给非工作人员使用。
 % \end{abstract}
+%
+% \tableofcontents
 %
 % \section{简介}
 %
@@ -108,7 +114,7 @@
 % 书籍文类提供了以下几个选项：
 %
 % \begin{description}
-% \item[\textsf{a4paper},\textsf{b5paper}] 
+% \item[\textsf{a4paper}, \textsf{b5paper}] 
 %   分别要求页面使用常规的A4纸张尺寸（210mm*297mm）或比A4更小的B5纸张尺寸（176mm*250mm）
 %   进行页面设计。默认使用\textsf{a4paper}。
 % \item[\textsf{sourcefont}] 使用开源的思源宋体（Source Han Serif
@@ -127,14 +133,14 @@
 % 笔记文类提供了以下几个选项：
 %
 % \begin{description}
-% \item[\textsf{a5paper},\textsf{mobile},\textsf{pc}] 均为设置页面尺寸的选项。其中
+% \item[\textsf{a5paper}, \textsf{mobile}, \textsf{pc}] 均为设置页面尺寸的选项。其中
 % \textsf{a5paper}选项使页面设置为A5纸张的大小（148mm*210mm），\textsf{pc}选项使页面
 % 设置为8in*6in的4:3屏大小（类似于Powerpoint 2003的默认页面尺寸设置），\textsf{mobile}
 % 选项将页面设置为比大多数智能手机屏幕略扁平些的4in*6in大小。默认使用\textsf{a5paper}。
-% \item[\textsf{color},\textsf{nocolor}] 分别使文档的颜色打开与关闭。默认打开颜色。
+% \item[\textsf{color}, \textsf{nocolor}] 分别使文档的颜色打开与关闭。默认打开颜色。
 % \item[\textsf{opensource}] 设置作品为开源的，在发布页（见后）打开的情况下于发布页上
 % 显示开源地址和作品版本。默认关。
-% \item[\textsf{publishpage},\textsf{nopublishpage}] 分别打开或关闭文档的发布页，
+% \item[\textsf{publishpage}, \textsf{nopublishpage}] 分别打开或关闭文档的发布页，
 % 该页面在正文之前，显示文档的基本信息、许可证和开源信息（若打开了\textsf{opensource}
 % 选项）。默认开。
 %
@@ -214,7 +220,7 @@
 %<*book>
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesClass{qyxf-book}
-  [2019/05/11 v1.1a Template for qyxf's book]
+  [2019/05/26 v2.1 Template for qyxf's book]
 \typeout{The book template provided by Qian Yuan Xue Fu}
 %    \end{macrocode}
 %
@@ -444,8 +450,8 @@ left=20pt]
 \centerline{\tcbox{\ccbyncnd\ \fangsong 知识共享 (Creative Commons) BY-NC-ND 4.0 协议}%
 \\[0.3\baselineskip]}
 本作品采用 \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{\textbf{CC协议}}
-进行许可。使用者可以在给出\emph{作者署名及资料来源}的前提下对本作品进行\emph{转载}，但不得对
-本作品进行\emph{修改}，亦不得基于本作品进行\emph{二次创作}，不得将本作品运用于\emph{商业用途}。
+进行许可。使用者可以在给出作者署名及资料来源的前提下对本作品进行转载，但不得对本作品进行
+修改，亦不得基于本作品进行二次创作，不得将本作品运用于商业用途。
 \end{tcolorbox}
 %    \end{macrocode}
 %
@@ -497,7 +503,7 @@ left=20pt]
 %    \begin{macrocode}
 %<*note>
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{qyxf-note}[2019/05/11 v1.0a Template for qyxf's note]
+\ProvidesClass{qyxf-note}[2019/05/11 v2.1 Template for qyxf's note]
 \LoadClass[12pt,oneside]{article}
 %    \end{macrocode}
 %
@@ -616,7 +622,8 @@ left=20pt]
 \fi
 %    \end{macrocode}
 %
-% 引用一些绘图和样式设置的宏包，并调整列表标记样式。
+% 引用一些绘图和样式设置的宏包，并调整列表标记样式。这里直接引用Elegant\LaTeX{}
+% 系列文类所设计的列表标志方案。
 %    \begin{macrocode}
 \RequirePackage{tikz,tcolorbox}
 \usetikzlibrary{shadows}
@@ -632,8 +639,6 @@ circular drop shadow] circle (2pt);}
 \setlist[enumerate,4]{label=\color{mycolor}(\roman*),font=\bfseries}
 \setlist[itemize,1]{label={\eBall}}
 \setlist[itemize,2]{label={\eShadow}}
-%% source1: https://tex.stackexchange.com/questions/41408/a-five-level-deep-list
-%% source2: https://tex.stackexchange.com/questions/318199/change-color-of-itemize-bullet
 %    \end{macrocode}
 %
 % 定义发布页所需的文档信息，与\textsf{qyxf-book}文类兼容。
@@ -658,7 +663,7 @@ left=0mm,colframe=mycolor!90!white,colback=mycolor!5!white]{\bfseries 练习#1}\
 % 之下。首先配置文档的元数据。
 %    \begin{macrocode}
 \renewcommand*{\maketitle}{
-\hypersetip{
+\hypersetup{
   pageanchor=false,
   pdfauthor=\@author, 
   pdftitle=\@title,
@@ -687,9 +692,8 @@ left=0mm,colframe=mycolor!90!white,colback=mycolor!5!white]{\bfseries 练习#1}\
     本作品采用\textbf{知识共享 (Creative Commons) BY-NC-ND 4.0 协议}%
     \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{\tcbox[on line,%
     colframe=mycolor!90!white,colback=mycolor!5!white,left=0pt,right=0pt,top=0pt,%
-    bottom=0pt]{\ccbyncnd}}进行许可。使用者可以在给出\emph{作者署名及资料来源}的前提
-    下对本作品进行\emph{转载}，但不得对本作品进行\emph{修改}，亦不得基于本作品进行
-    \emph{二次创作}，不得将本作品运用于\emph{商业用途}。
+    bottom=0pt]{\ccbyncnd}}进行许可。使用者可以在给出作者署名及资料来源的前提下对本作品进行转载，
+    但不得对本作品进行修改，亦不得基于本作品进行二次创作，不得将本作品运用于商业用途。
     \end{tcolorbox}
     \if@opensource
       \begin{tcolorbox}[colframe=mycolor!90!white,colback=mycolor!5!white]
@@ -719,6 +723,7 @@ left=0mm,colframe=mycolor!90!white,colback=mycolor!5!white]{\bfseries 练习#1}\
 % \section{qyxf-notice 文类实现}
 %
 % 通知文类的定义较为简单，不提供选项，在此不在多作说明。
+%
 %    \begin{macrocode}
 %<*notice>
 \NeedsTeXFormat{LaTeX2e}
