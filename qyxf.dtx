@@ -486,6 +486,7 @@ left=20pt]
 \newif\if@screen
 \newif\if@opensource
 \newif\if@publishpage
+\newif\if@sourcefont
 \DeclareOption{mobile}{
   \setlength\paperwidth{4in}
   \setlength\paperheight{6in}
@@ -503,6 +504,7 @@ left=20pt]
 \DeclareOption{opensource}{\@opensourcetrue}
 \DeclareOption{publishpage}{\@publishpagetrue}
 \DeclareOption{nopublishpage}{\@publishpagefalse}
+\DeclareOption{sourcefont}{\@sourcefonttrue}
 %    \end{macrocode}
 % 将其他未知选项交由\textsf{article}文类统一处理，定义默认选项，并开始处理相关选项。
 %    \begin{macrocode}
@@ -540,10 +542,17 @@ left=20pt]
 \fi
 %    \end{macrocode}
 %
-% 引用一些基本的宏包，注意\textsf{amsmath}与\textsf{fourier}两宏包的先后顺序不能变。
+% 引用一些基本的宏包，并配置字体。注意\textsf{amsmath}与\textsf{fourier}两宏包的先后
+% 顺序不能变。
 %    \begin{macrocode}
-\RequirePackage{ctex}
-\RequirePackage{amsmath,fourier}
+\if@sourcefont
+  \RequirePackage[SlantFont]{xeCJK}
+  \RequirePackage[heading]{ctex}
+  \setCJKmainfont{思源宋体}
+  \setCJKsansfont{思源黑体}
+\else
+  \RequirePackage[heading]{ctex}
+\fi\RequirePackage{amsmath,fourier}
 %    \end{macrocode}
 % 再引用图表宏包，并设定图片路径。
 %    \begin{macrocode}
