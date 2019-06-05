@@ -69,11 +69,11 @@
 \fi
 \if@sourcefont
   \RequirePackage[SlantFont]{xeCJK}
-  \RequirePackage[heading]{ctex}
+  \RequirePackage{ctex}
   \setCJKmainfont{思源宋体}
   \setCJKsansfont{思源黑体}
 \else
-  \RequirePackage[heading]{ctex}
+  \RequirePackage{ctex}
 \fi\RequirePackage{amsmath,fourier}
 \RequirePackage{graphicx,booktabs,longtable}
 \graphicspath{{images/}}

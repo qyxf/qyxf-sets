@@ -26,7 +26,7 @@
 %% 
 %% -----------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{qyxf-notice}[2019/04/17 Template for qyxf's notice]
+\ProvidesClass{qyxf-notice}[2019/06/05 Template for qyxf's notice]
 \LoadClass[12pt,a5paper,onecolumn,oneside]{article}
 \RequirePackage[margin=1cm,bottom=2.5cm]{geometry}
 \RequirePackage{ctex}
@@ -40,11 +40,12 @@
 \renewcommand{\headrulewidth}{0pt}
 \cfoot{%
 \hrule\vskip\baselineskip
-\centering\includegraphics[width=0.55\textwidth]{name.png}
+\textsc{To be a Global Talent. }{\kaishu 为世界之光}
 }
 \renewcommand{\maketitle}{
-\centerline{\Large\fbox{\itshape QyxF$\ \spadesuit$} {\kaishu 钱学森书院学业辅导中心}}%
 \begin{center}
+{\Large\kaishu 钱学森书院学业辅导中心}\\
+\textsc{Qian Yuan Xue Fu}\\
 \begin{tikzpicture}
 \node (A) at (0.2\textwidth,0) {};
 \node (B) at (0.8\textwidth,0) {};
