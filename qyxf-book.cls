@@ -179,9 +179,7 @@ left=20pt]
 \begin{tcolorbox}[title={\bfseries 许可证说明}]
 \centerline{\tcbox{\ccbyncnd\ \fangsong 知识共享 (Creative Commons) BY-NC-ND 4.0 协议}%
 \\[0.3\baselineskip]}
-本作品采用 \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{\textbf{CC协议}}
-进行许可。使用者可以在给出作者署名及资料来源的前提下对本作品进行转载，但不得对本作品进行
-修改，亦不得基于本作品进行二次创作，不得将本作品运用于商业用途。
+本作品采用 \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{\textbf{CC协议}}进行许可。使用者可以在给出作者署名及资料来源的前提下对本作品进行转载，但不得对本作品进行修改，亦不得基于本作品进行二次创作，不得将本作品运用于商业用途。
 \end{tcolorbox}
 \if@opensource
   \begin{tcolorbox}
