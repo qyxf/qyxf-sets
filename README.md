@@ -1,5 +1,5 @@
-# templates-of-LaTeX （QYXF的LaTeX模板）
-本仓库用于存放钱院学辅公用的若干`LaTeX`模板。
+# qyxf-sets 宏集
+`qyxf-sets` 宏集是由钱院学辅开发和使用的一系列文档类之合集。
 
 ## 内容清单
 1. `qyxf-notice.cls` 公告、通知的文档类。
