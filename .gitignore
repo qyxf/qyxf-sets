@@ -18,8 +18,11 @@
 *.snm
 
 ## qyxf-book撰写期间出产文件
-test.tex
-test.pdf
 *.glo
+*.gls
+*.ind
 *.idx
-bbs.tex
+*.ilg
+*.hd
+!demo.tex
+demo.*
