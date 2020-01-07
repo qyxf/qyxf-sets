@@ -55,11 +55,17 @@
 % \changes{v1.0}{2019/05/03}{初始版本，提供了基本的功能。}
 % \changes{v2.0}{2019/05/10}{将现有的qyxf-book文类与之前的qyxf-note和qyxf-notice
 % 文类合并于同一安装文件下，更名为qyxf宏集。}
-% \changes{v2.0a}{2019/05/11}{完善了说明文档的内容，并对各文类的内容稍作了调整。}
-% \changes{v2.1}{2019/06/05}{移除了不合用的字体设置，修改了标题样式，并优化了文档的
+% \changes{v2.01}{2019/05/11}{完善了说明文档的内容，并对各文类的内容稍作了调整。}
+% \changes{v2.1}{2019/05/26}{移除了不合用的字体设置，修改了标题样式，并优化了文档的
 % 结构。}
+% \changes{v2.2}{2019/12/22}{大幅优化，移除了 qyxf-notice 文类，增加了 qyxf-report 文类，并改善了
+% 许多细节方面的体验。}
 %
 % \GetFileInfo{\jobname.dtx}
+%
+% \DeclareRobustCommand{\pkg}[1]{\textsf{\mdseries #1}}
+% \DeclareRobustCommand{\cls}[1]{\textsf{\mdseries #1}}
+% \providecommand{\option}[1]{\cmd{#1}}
 %
 % \renewcommand{\filedate}{2019/06/05}
 % \renewcommand{\fileversion}{v2.1}
@@ -71,91 +77,91 @@
 % \maketitle
 %
 % \begin{abstract}
-%   \textsf{\jobname}宏集是由钱院学辅（QYXF）设计的一系列\LaTeX{}文类，由钱院学辅学研部
-%   维护。该模板包含书籍文类\textsf{qyxf-book}，笔记文类\textsf{qyxf-note}、公告文类
-%   \textsf{qyxf-notice}，分别用于正规出品物和一般资料的排版，提供有多个可选项。目前，
-%   书籍与通知文类不计划对一般用户开放（和优化），而笔记文类可提供给非工作人员使用。
+%   \textsf{\jobname}宏集是由钱院学辅设计的一系列 \LaTeX{} 文类，由钱院学辅学研部
+%   维护。该模板包含书籍文类 \textsf{qyxf-book}，笔记文类 \textsf{qyxf-note}、报告文类
+%   \textsf{qyxf-report}，提供有多个可选项。
 % \end{abstract}
 %
 % \tableofcontents
 %
 % \section{简介}
 %
-% \textsf{\jobname}宏集是由\textbf{钱院学辅}
+% \cls{\jobname} 宏集是由 \textbf{钱院学辅}
 % \footnote{全称为\textit{西安交通大学钱学森书院学业辅导中心}，是西安交通大学学业辅导中
-% 心在钱学森书院的下属机构，主要负责对本书院的同学开展学业辅导工作，资料的整理与排印是
-% 钱院学辅的一项重要工作。钱院学辅在GitHub上的组织页面为\url{https://github.com/qyxf/}。
+% 心在钱学森书院的下属机构，主要负责对本书院同学开展学业辅导工作。其中，资料的整理、排印是
+% 钱院学辅的一项重要工作。钱院学辅在GitHub上的组织页面为 \url{https://github.com/qyxf/}。
 % 在发布相关开源内容时，“钱院学辅”这一名称常用英文记为 Qian Yuan Xue Fu ，或直接缩记为
-% \textsf{qyxf} 。}
-% 设计的一系列\LaTeX{}文类。其目前包括下面三个分立的文类：
-% \begin{enumerate}
-% \item \textsf{qyxf-book} 文类：书籍模板，用于钱院学辅排印出品正式的、中等以上容量
-%   的资料。
-% \item \textsf{qyxf-note} 文类：笔记模板，用于钱院学辅排印出品非正式的、较小容量
-%   （特别是单篇）的资料，也可用于预览排版效果。在不久的将来，希望将其推广为日常可用
-%   的一个轻量级文本文类。
-% \item \textsf{qyxf-notice} 文类：通知公告文类，用于钱院学辅排印纸质版本的公告。
-% \end{enumerate}
+% qyxf 。}
+% 设计的一系列 \LaTeX{} 文类。包括三个分立的文类：
+% 
+% \begin{description}
+%   \item [\cls{qyxf-book}] 书籍模板，用于排印正式的、中等以上容量的资料。
+%   \item [\cls{qyxf-note}] 笔记模板，用于排印非正式的、较小容量的资料。
+%   \item [\cls{qyxf-report}] 报告文类，用于排印实验报告、结课论文等轻量级的
+%         汇报性作品。
+% \end{description}
 %
-% 在各个文类的设计过程中，参考了其他一些已经成熟的设计，如\LaTeX{}系统默认的
-% \textsf{book}文类，以及Elegant\LaTeX{}\footnote{\url{https://elegantlatex.org/}}
-% 出品的ElegantBook文类和ElegantNote文类。
+% 在各个文类的早期设计过程中，参考了其他一些已经成熟的设计，如 \LaTeX{}系统默认的
+% \cls{book}文类，以及 Elegant\LaTeX \footnote{\url{https://elegantlatex.org/}}
+% 系列作品。
 %
-% 目前，本宏集暂由钱院学辅学研部的\textsf{xjtu-blacksmith}维护。在相关机制完善后，将把
+% 目前，本宏集暂由钱院学辅学研部的 xjtu-blacksmith 维护。在相关机制完善后，将把
 % 此套宏集交由一个可持续运转的工作小组进行长期维护与发展。
 %
 % \section{使用}
-% 在\verb|\documenclass|命令中引用对应的文档类即可。特别地，对于\textsf{qyxf-book}文类
-% 与\textsf{qyxf-note}文类而言，目前这两个文类除文类选项之外的其余内容都是兼容的，因此可以
-% 在测试效果时自由切换。
+% 在 \cs{documenclass} 命令中引用对应的文档类即可。
+%
+% 特别地，对于 \cls{qyxf-book} 文类 与 \cls{qyxf-note} 文类而言，它们除选项之外的功能
+% 相互兼容，因此可以在测试效果时自由切换。
 %
 % \subsection{qyxf-book 文类选项}
 % 书籍文类提供了以下几个选项：
 %
 % \begin{description}
-% \item[\textsf{a4paper}, \textsf{b5paper}] 
-%   分别要求页面使用常规的A4纸张尺寸（210mm*297mm）或比A4更小的B5纸张尺寸（176mm*250mm）
-%   进行页面设计。默认使用\textsf{a4paper}。
-% \item[\textsf{sourcefont}] 使用开源的思源宋体（Source Han Serif
-% \footnote{\url{https://github.com/adobe-fonts/source-han-serif}}）/思源黑体
-% （Source Han Sans\footnote{\url{https://github.com/adobe-fonts/source-han-sans}}）
-% 的字体组合方案替代\textsf{ctex}宏包为本文类默认指定的字体方案（本机上应装有相应字体）。默认关。
-% \item[\textsf{parskip}] 增加使段落间更为宽敞的的段距（目前设定值为0.3倍基准行距）。默认关。
-% \item[\textsf{color}] 使用有颜色的主题进行排版。默认关。（目前此功能尚未实现）
-% \item[\textsf{decoration}] 增加一些页面装饰。默认开。（目前尚未实现关闭功能）
-% \item[\textsf{opensource}] 设置作品为开源的，在封二上显示开源地址和作品版本。默认关。
+% \item[\option{a4paper} \textbar~\option{b5paper}] 
+%   分别要求页面使用常规的A4纸张尺寸（210mm*297mm）或比 A4 更小的 B5 纸张尺寸（176mm*250mm）
+%   进行页面设计。默认使用 \option{a4paper}。
+% \item[\option{sourcefont}] 使用
+% 思源宋体\footnote{\url{https://github.com/adobe-fonts/source-han-serif}}及
+% 思源黑体\footnote{\url{https://github.com/adobe-fonts/source-han-sans}}字体
+% 组合方案替代 \pkg{ctex} 宏包为本文类默认指定的字体方案
+% \footnote{本机上应安装有思源字体的 Regular 和 Bold 两种字形，共四种字体。}。
+% 默认关。
+% \item[\option{parskip}] 增加使段落间更为宽敞的的段距（目前设定值为0.3倍基准行距）。默认关。
+% \item[\option{decoration}] 增加页面装饰。默认开。
+% \item[\option{opensource}] 设置作品为开源的，在封二上显示开源地址和作品版本。默认关。
 % \end{description}
-% 此外，\textsf{qyxf-book} 文类是基于 \textsf{book} 进行设计的，因此允许接受 \textsf{book}
+% 此外，\cls{qyxf-book} 文类是基于 \cls{book} 进行设计的，因此允许接受 \cls{book}
 % 的相关选项。
 %
 % \subsection{qyxf-note 文类选项}
 % 笔记文类提供了以下几个选项：
 %
 % \begin{description}
-% \item[\textsf{a5paper}, \textsf{mobile}, \textsf{pc}] 均为设置页面尺寸的选项。其中
-% \textsf{a5paper}选项使页面设置为A5纸张的大小（148mm*210mm），\textsf{pc}选项使页面
-% 设置为8in*6in的4:3屏大小（类似于Powerpoint 2003的默认页面尺寸设置），\textsf{mobile}
-% 选项将页面设置为比大多数智能手机屏幕略扁平些的4in*6in大小。默认使用\textsf{a5paper}。
-% \item[\textsf{color}, \textsf{nocolor}] 分别使文档的颜色打开与关闭。默认打开颜色。
-% \item[\textsf{opensource}] 设置作品为开源的，在发布页（见后）打开的情况下于发布页上
+% \item[\option{a5paper} \textbar~\option{mobile} \textbar~\option{pc}] 均为设置页面尺寸的选项。其中
+% \option{a5paper}选项使页面设置为 A5 纸张的大小（148mm*210mm），\option{pc}选项使页面
+% 设置为8in*6in的4:3屏大小（类似于Powerpoint 2003的默认页面尺寸设置），\option{mobile}
+% 选项将页面设置为比大多数智能手机屏幕略扁平些的4in*6in大小。默认使用\option{a5paper}。
+% \item[\option{color} \textbar~\option{nocolor}] 分别使文档的颜色打开与关闭。默认打开颜色。
+% \item[\option{opensource}] 设置作品为开源的，在发布页（见后）打开的情况下于发布页上
 % 显示开源地址和作品版本。默认关。
-% \item[\textsf{publishpage}, \textsf{nopublishpage}] 分别打开或关闭文档的发布页，
-% 该页面在正文之前，显示文档的基本信息、许可证和开源信息（若打开了\textsf{opensource}
+% \item[\option{publishpage} \textbar~\option{nopublishpage}] 分别打开或关闭文档的发布页，
+% 该页面在正文之前，显示文档的基本信息、许可证和开源信息（若打开了\option{opensource}
 % 选项）。默认开。
 %
 % \end{description}
-% 此外，\textsf{qyxf-note} 文类是基于 \textsf{article} 进行设计的，因此允许接受
-% \textsf{article} 的相关选项。
+% 此外，\cls{qyxf-note} 文类是基于 \cls{article} 进行设计的，因此允许接受
+% \cls{article} 的相关选项。
 %
 % \subsection{文档信息配置}
-% 除了\textsf{\textbackslash maketitle}默认需求的\textsf{\textbackslash title}、
-% \textsf{\textbackslash author}与\textsf{\textbackslash date}三条基本信息之外，
-% \textsf{qyxf-book}与\textsf{qyxf-note}文类还提供了以下信息的接口：
+% 除了\cs{maketitle} 默认需求的 \cs{title}、
+% \cs{author}与\cs{date}三条基本信息之外，
+% \cls{qyxf-book}与\cls{qyxf-note}文类还提供了以下信息的接口：
 % \begin{description}
-% \item[\textsf{\textbackslash subtitle}] 副标题信息，建议设置为本作品的英文标题。
-% \item[\textsf{\textbackslash typo}] 排版人员信息。
-% \item[\textsf{\textbackslash version}] 版本号，在\textsf{opensource}选项开启时有效。
-% \item[\textsf{\textbackslash sourcepage}] 开源页面地址，在\textsf{opensource}选项开
+% \item[\cs{subtitle}] 副标题信息，建议设置为本作品的英文标题。
+% \item[\cs{typo}] 排版人员信息。
+% \item[\cs{version}] 版本号，在 \option{opensource} 选项开启时有效。
+% \item[\cs{sourcepage}] 开源页面地址，在\option{opensource} 选项开
 %   启时有效。
 % \end{description}
 % 建议用户在排版时一定要将以上所有的文档信息填全，否则在封二/发布页的文档信息盒子里将显示
@@ -164,10 +170,10 @@
 % \subsection{特殊环境}
 % 书籍与笔记文类目前提供的特殊环境（命令）有：
 % \begin{description}
-% \item[\textsf{\textbackslash exercise}] 输出一个表示“练习X”的盒子。
-% \item[\textsf{\textbackslash solve}] 引导一个“解”段落。
-% \item[\textsf{\textbackslash note}] 引导一个“注记”段落。
-% \item[\textsf{\textbackslash analysis}] 引导一个“分析”段落。
+% \item[\cs{exercise}] 输出一个表示“练习X”的盒子。
+% \item[\cs{solve}] 引导一个“解”段落。
+% \item[\cs{note}] 引导一个“注记”段落。
+% \item[\cs{analysis}] 引导一个“分析”段落。
 % \end{description}
 % 请用户善用这些特殊环境，以使得页面趋于标准、清晰。
 %
