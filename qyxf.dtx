@@ -58,8 +58,7 @@
 % \changes{v2.01}{2019/05/11}{完善了说明文档的内容，并对各文类的内容稍作了调整。}
 % \changes{v2.1}{2019/05/26}{移除了不合用的字体设置，修改了标题样式，并优化了文档的
 % 结构。}
-% \changes{v2.2}{2019/12/22}{大幅优化，移除了 qyxf-notice 文类，增加了 qyxf-report 文类，并改善了
-% 许多细节方面的体验。}
+% \changes{v2.2}{2020/01/08}{不计划继续开发，仅对文档做了必要的修改。}
 %
 % \GetFileInfo{\jobname.dtx}
 %
@@ -67,8 +66,8 @@
 % \DeclareRobustCommand{\cls}[1]{\textsf{\mdseries #1}}
 % \providecommand{\option}[1]{\cmd{#1}}
 %
-% \renewcommand{\filedate}{2019/06/05}
-% \renewcommand{\fileversion}{v2.1}
+% \renewcommand{\filedate}{2020/01/08}
+% \renewcommand{\fileversion}{v2.2}
 % \title{\textsf{\jobname} 宏集： The \textsf{\jobname} sets\thanks{本说明文档
 %   对应于\textsf{\jobname}宏集的~\fileversion 版本，发布时间为\filedate.}}
 % \author{xjtu-blacksmith \\ \texttt{yjr134@163.com}}
@@ -336,9 +335,12 @@ right=0mm,left=0mm]{\bfseries 练习#1}\ }
 \vspace{-1ex}\centering
 \begin{tikzpicture}
   \node at (0,0) {\pgfornamenthan[scale=0.2,symmetry=h]{60}};
-  \node[fill opacity=0.2,draw opacity=0] at (0.02,-0.03) {\pgfornamenthan[scale=0.2,symmetry=h]{60}};
+  \node[fill opacity=0.2,draw opacity=0] at (0.02,-0.03)
+  {\pgfornamenthan[scale=0.2,symmetry=h]{60}};
 \end{tikzpicture}}
-\titleformat{\chapter}[block]{\centering\bfseries\fontsize{2.5em}{1ex}}{\CTEXthechapter}
+\titleformat{\chapter}[block]{
+  \centering\bfseries\fontsize{2.5em}{1ex}
+}{\CTEXthechapter}
 {1em}{}[\if@decoration\decoration\fi]
 \titlespacing{\chapter}{0pt}{*1}{*4}
 \titlecontents{chapter}[24pt]{\hspace{-2pc}\filright}
@@ -468,8 +470,9 @@ left=20pt,top=0.5ex,before skip=0pt]
 \centerline{\tcbox{\ccbyncnd\ \fangsong 知识共享 (Creative Commons) BY-NC-ND 4.0 协议}%
 \\[0.3\baselineskip]}
 本作品采用 \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{\textbf{CC协议}}
-进行许可。使用者可以在给出作者署名及资料来源的前提下对本作品进行转载，但不得对本作品进行
-修改，亦不得基于本作品进行二次创作，不得将本作品运用于商业用途。
+进行许可。使用者可以在给出作者署名及资料来源的前提下对本作品进行转载，
+但不得对本作品进行修改，亦不得基于本作品进行二次创作，
+不得将本作品运用于商业用途。
 \end{tcolorbox}
 %    \end{macrocode}
 %
@@ -648,7 +651,8 @@ left=20pt,top=0.5ex,before skip=0pt]
 \RequirePackage{ccicons}
 \RequirePackage[shortlabels]{enumitem}
 \setlist{nolistsep}
-\newcommand*{\eBall}{\tikz \draw [baseline, ball color=mycolor, draw=mycolor] circle (2pt);}
+\newcommand*{\eBall}{\tikz \draw [baseline, ball color=mycolor,
+  draw=mycolor] circle (2pt);}
 \newcommand*{\eShadow}{\tikz \draw [baseline, fill=mycolor,draw=mycolor,%
 circular drop shadow] circle (2pt);}
 \setlist[enumerate,1]{label=\color{mycolor}(\arabic*),font=\bfseries}
@@ -710,8 +714,10 @@ left=0mm,colframe=mycolor!90!white,colback=mycolor!5!white]{\bfseries 练习#1}\
     本作品采用\textbf{知识共享 (Creative Commons) BY-NC-ND 4.0 协议}%
     \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{\tcbox[on line,%
     colframe=mycolor!90!white,colback=mycolor!5!white,left=0pt,right=0pt,top=0pt,%
-    bottom=0pt]{\ccbyncnd}}进行许可。使用者可以在给出作者署名及资料来源的前提下对本作品进行转载，
-    但不得对本作品进行修改，亦不得基于本作品进行二次创作，不得将本作品运用于商业用途。
+    bottom=0pt]{\ccbyncnd}}进行许可。
+    使用者可以在给出作者署名及资料来源的前提下对本作品进行转载，
+    但不得对本作品进行修改，亦不得基于本作品进行二次创作，
+    不得将本作品运用于商业用途。
     \end{tcolorbox}
     \if@opensource
       \begin{tcolorbox}[colframe=mycolor!90!white,colback=mycolor!5!white]
