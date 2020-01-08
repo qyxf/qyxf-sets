@@ -1,6 +1,6 @@
 # qyxf-sets 宏集
 
-> 警告：因开发、使用成本太高，本宏集停止维护，之后直接用 `cls` 文件继续开发学辅所需的 `qyxf-book` 模板。本仓库即日起封存，各发行版本仍可继续使用。详见[这份备忘录](https://github.com/qyxf/qyxf-sets/issues/5).
+> 警告：因开发、使用成本太高，本宏集停止维护，之后直接用 `cls` 文件继续开发学辅所需的 `qyxf-book` 模板（[在这里](https://github.com/qyxf/qyxf-book/)）。本仓库即日起封存，各发行版本仍可继续使用。详见[这份备忘录](https://github.com/qyxf/qyxf-sets/issues/5).
 
 `qyxf-sets` 宏集是由钱院学辅开发和使用的一系列文档类之合集。
 
