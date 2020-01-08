@@ -26,3 +26,6 @@
 *.hd
 !demo.tex
 demo.*
+
+## 编辑器文件
+.vscode
