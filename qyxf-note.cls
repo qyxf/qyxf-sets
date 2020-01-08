@@ -110,7 +110,8 @@
 \RequirePackage{ccicons}
 \RequirePackage[shortlabels]{enumitem}
 \setlist{nolistsep}
-\newcommand*{\eBall}{\tikz \draw [baseline, ball color=mycolor, draw=mycolor] circle (2pt);}
+\newcommand*{\eBall}{\tikz \draw [baseline, ball color=mycolor,
+  draw=mycolor] circle (2pt);}
 \newcommand*{\eShadow}{\tikz \draw [baseline, fill=mycolor,draw=mycolor,%
 circular drop shadow] circle (2pt);}
 \setlist[enumerate,1]{label=\color{mycolor}(\arabic*),font=\bfseries}
@@ -153,8 +154,10 @@ left=0mm,colframe=mycolor!90!white,colback=mycolor!5!white]{\bfseries 练习#1}\
     本作品采用\textbf{知识共享 (Creative Commons) BY-NC-ND 4.0 协议}%
     \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{\tcbox[on line,%
     colframe=mycolor!90!white,colback=mycolor!5!white,left=0pt,right=0pt,top=0pt,%
-    bottom=0pt]{\ccbyncnd}}进行许可。使用者可以在给出作者署名及资料来源的前提下对本作品进行转载，
-    但不得对本作品进行修改，亦不得基于本作品进行二次创作，不得将本作品运用于商业用途。
+    bottom=0pt]{\ccbyncnd}}进行许可。
+    使用者可以在给出作者署名及资料来源的前提下对本作品进行转载，
+    但不得对本作品进行修改，亦不得基于本作品进行二次创作，
+    不得将本作品运用于商业用途。
     \end{tcolorbox}
     \if@opensource
       \begin{tcolorbox}[colframe=mycolor!90!white,colback=mycolor!5!white]

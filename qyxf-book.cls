@@ -43,14 +43,17 @@
 \DeclareOption{parskip}{
   \setlength\parskip{0.2\baselineskip}}
 \DeclareOption{decoration}{\@decorationtrue}
+\DeclareOption{plain}{\@decorationfalse}
 \DeclareOption{opensource}{\@opensourcetrue}
 \DeclareOption{sourcefont}{\@sourcefonttrue}
 \ProcessOptions
 \if@sourcefont
-  \RequirePackage[SlantFont]{xeCJK}
-  \RequirePackage[heading]{ctex}
+  \PassOptionsToPackage{SlantFont}{xeCJK}
+  \RequirePackage[heading,fontset=none]{ctex}
   \setCJKmainfont{思源宋体}
   \setCJKsansfont{思源黑体}
+  \newCJKfontfamily[zhfs]\fangsong{FangSong}
+  \renewcommand\CJKttdefault{zhfs}
 \else
   \RequirePackage[heading]{ctex}
 \fi
@@ -67,7 +70,7 @@
 \setlength{\intextsep}{6pt plus 2pt minus 2pt}
 \RequirePackage{longtable,booktabs}
 \RequirePackage{tikz}
-\usetikzlibrary{calc,backgrounds}
+\usetikzlibrary{calc,backgrounds,shadows}
 \RequirePackage{tcolorbox,tabu}
 \tcbuselibrary{listings,theorems,skins}
 \newcommand{\exercise}[1]{\noindent\tcbox[on line,top=0mm,bottom=0mm,%
@@ -77,6 +80,7 @@ right=0mm,left=0mm]{\bfseries 练习#1}\ }
 \newcommand{\analysis}{\noindent\textbf{分析}\ }
 \RequirePackage{geometry}
 \geometry{margin=1in}
+\setlength{\footskip}{30pt}
 \RequirePackage{hyperref}
 \hypersetup{
   breaklinks,
@@ -91,9 +95,17 @@ right=0mm,left=0mm]{\bfseries 练习#1}\ }
 \RequirePackage{pgfornament}
 \ctexset{section={name={\S,}}}
 \RequirePackage{titlesec,titletoc}
-\newcommand{\decoration}{\vspace{-.3\baselineskip}\pgfornamenthan[scale=0.2,symmetry=h]{60}}
-\titleformat{\chapter}[block]{\centering\bfseries\Huge}{\CTEXthechapter}
-{1em}{}[\centering\decoration]%
+\newcommand{\decoration}{
+\vspace{-1ex}\centering
+\begin{tikzpicture}
+  \node at (0,0) {\pgfornamenthan[scale=0.2,symmetry=h]{60}};
+  \node[fill opacity=0.2,draw opacity=0] at (0.02,-0.03)
+  {\pgfornamenthan[scale=0.2,symmetry=h]{60}};
+\end{tikzpicture}}
+\titleformat{\chapter}[block]{
+  \centering\bfseries\fontsize{2.5em}{1ex}
+}{\CTEXthechapter}
+{1em}{}[\if@decoration\decoration\fi]
 \titlespacing{\chapter}{0pt}{*1}{*4}
 \titlecontents{chapter}[24pt]{\hspace{-2pc}\filright}
               {\normalsize\bfseries\contentspush{\thecontentslabel\ }}
@@ -106,16 +118,20 @@ right=0mm,left=0mm]{\bfseries 练习#1}\ }
               {}{\titlerule*[8pt]{}\contentspage}
 \setcounter{tocdepth}{2}
 \RequirePackage{fancyhdr}
+\newcommand{\footdeco}{
+\resizebox{10em}{5ex}{
+\begin{tikzpicture}
+  \node at (0,0) {\pgfornamenthan[scale=0.05]{58}};
+  \node[opacity=0.2, draw opacity=0] at (0.02,-0.03) {\pgfornamenthan[scale=0.05]{58}};
+\end{tikzpicture}}\\[-1ex]}
 \fancyhead[EC]{\fangsong\nouppercase\leftmark}
 \fancyhead[OC]{\fangsong\nouppercase\rightmark}
 \fancyhead[EL,OR]{\bf\thepage}
 \fancyhead[ER,OL]{}
-\fancyfoot[C]{\textsc{Qian Yuan Xue Fu}\\\resizebox{0.2\linewidth}{1.5ex}{%
-\pgfornamenthan[scale=0.05]{58}}}
+\fancyfoot[C]{\if@decoration\footdeco\else\vspace{1ex}\fi\textsc{Qian Yuan Xue Fu}}
 \fancypagestyle{plain}{%
 \fancyhf{}
-\fancyfoot[C]{\textsc{Qian Yuan Xue Fu}\\\resizebox{0.2\linewidth}{1.5ex}{%
-\pgfornamenthan[scale=0.05]{58}}}
+\fancyfoot[C]{\if@decoration\footdeco\else\vspace{1ex}\fi\textsc{Qian Yuan Xue Fu}}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 }
@@ -143,13 +159,13 @@ right=0mm,left=0mm]{\bfseries 练习#1}\ }
 \phantom{s}
 \vspace{3cm}
 \begin{center}\large
-\begin{tcolorbox}[blanker,borderline west={1mm}{0pt}{black!80},%
-left=20pt]
+\begin{tcolorbox}[blanker,borderline west={1mm}{0pt}{black!90},%
+left=20pt,bottom=0.5ex,after skip=0pt]
 {\fontsize{40pt}{\baselineskip}\selectfont\bfseries\@title}\\[0.5\baselineskip]
 {\Huge\itshape\the\subtitle}
 \end{tcolorbox}
-\begin{tcolorbox}[blanker,borderline west={1mm}{0pt}{black!50},%
-left=20pt]
+\begin{tcolorbox}[blanker,borderline west={1mm}{0pt}{black!40},%
+left=20pt,top=0.5ex,before skip=0pt]
 {\Large 作者：\@author\\[0.2\baselineskip]
 \@date}
 \end{tcolorbox}
@@ -179,7 +195,10 @@ left=20pt]
 \begin{tcolorbox}[title={\bfseries 许可证说明}]
 \centerline{\tcbox{\ccbyncnd\ \fangsong 知识共享 (Creative Commons) BY-NC-ND 4.0 协议}%
 \\[0.3\baselineskip]}
-本作品采用 \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{\textbf{CC协议}}进行许可。使用者可以在给出作者署名及资料来源的前提下对本作品进行转载，但不得对本作品进行修改，亦不得基于本作品进行二次创作，不得将本作品运用于商业用途。
+本作品采用 \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{\textbf{CC协议}}
+进行许可。使用者可以在给出作者署名及资料来源的前提下对本作品进行转载，
+但不得对本作品进行修改，亦不得基于本作品进行二次创作，
+不得将本作品运用于商业用途。
 \end{tcolorbox}
 \if@opensource
   \begin{tcolorbox}
